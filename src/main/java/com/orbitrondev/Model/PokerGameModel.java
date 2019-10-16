@@ -1,7 +1,6 @@
 package com.orbitrondev.Model;
 
 import java.util.ArrayList;
-
 import com.orbitrondev.PokerGame;
 
 public class PokerGameModel {

@@ -21,8 +21,6 @@ public class PokerGameController {
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
 	}
-	
-
 
     /**
      * Remove all cards from players hands, and shuffle the deck
