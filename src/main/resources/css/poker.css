@@ -1,0 +1,33 @@
+.label {
+	-fx-padding: 5.0px;
+    -fx-min-width: 200.0;
+    -fx-max-width: 2000.0;
+  	-fx-alignment: center;
+}
+
+#controlArea {
+    -fx-spacing: 15.0px;
+    -fx-padding: 5.0px;
+    -fx-border-color: black;
+    -fx-border-width: 2.0px;
+}
+
+.player {
+	-fx-padding: 5.0px;
+    -fx-border-color: black;
+    -fx-border-width: 2.0px;
+}
+
+.card {
+  -fx-font-size: 18px;
+	-fx-padding: 2.0px;
+    -fx-border-color: black;
+    -fx-border-width: 1.0px;
+	-fx-background-color: lemonchiffon;
+    -fx-min-width: 50;
+    -fx-pref-width: 111;
+    -fx-max-width: 500;
+    -fx-min-height: 80;
+    -fx-pref-height: 162;
+    -fx-max-height: 800;
+}
