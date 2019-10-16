@@ -17,24 +17,24 @@ public class HandTypeTest {
     //
     // Yet another method does this for a whole set of hands
     private static String[][] highCards = {
-        { "2S", "9C", "3H", "5D", "7H" },
-        { "7S", "5C", "AH", "JD", "6H" },
-        { "2S", "3S", "4S", "5S", "7S" },
-        { "AS", "KC", "QH", "JD", "TH" }
+        {"2S", "9C", "3H", "5D", "7H"},
+        {"7S", "5C", "AH", "JD", "6H"},
+        {"2S", "3S", "4S", "5S", "7S"},
+        {"AS", "KC", "QH", "JD", "TH"}
     };
 
     private static String[][] pairs = {
-        { "2S", "2C", "3H", "5D", "7H" },
-        { "2S", "AC", "3H", "5D", "AH" },
-        { "3S", "2C", "3H", "KD", "QH" },
-        { "9S", "2C", "2H", "5D", "7H" }
+        {"2S", "2C", "3H", "5D", "7H"},
+        {"2S", "AC", "3H", "5D", "AH"},
+        {"3S", "2C", "3H", "KD", "QH"},
+        {"9S", "2C", "2H", "5D", "7H"}
     };
 
     private static String[][] twoPairs = {
-        { "2S", "2C", "7H", "5D", "7H" },
-        { "2S", "AC", "5H", "5D", "AH" },
-        { "3S", "2C", "3H", "2D", "QH" },
-        { "9S", "2C", "2H", "5D", "5H" }
+        {"2S", "2C", "7H", "5D", "7H"},
+        {"2S", "AC", "5H", "5D", "AH"},
+        {"3S", "2C", "3H", "2D", "QH"},
+        {"9S", "2C", "2H", "5D", "5H"}
     };
 
     // This is where we store the translated hands
@@ -68,13 +68,13 @@ public class HandTypeTest {
      * Create a card from a 2-character String.
      * First character is the rank (2-9, T, J, Q, K, A)
      * Second character is the suit (C, D, H, S)
-     *
+     * <p>
      * No validation or error handling!
      */
     private Card makeCard(String in) {
         char r = in.charAt(0);
         Card.Rank rank = null;
-        if (r <= '9') rank = Card.Rank.values()[r-'0' - 2];
+        if (r <= '9') rank = Card.Rank.values()[r - '0' - 2];
         else if (r == 'T') rank = Card.Rank.Ten;
         else if (r == 'J') rank = Card.Rank.Jack;
         else if (r == 'Q') rank = Card.Rank.Queen;

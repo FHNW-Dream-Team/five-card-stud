@@ -2,6 +2,7 @@ package com.orbitrondev.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -25,8 +26,9 @@ public class DeckOfCards {
     public SimpleIntegerProperty getCardsRemainingProperty() {
         return cardsRemaining;
     }
+
     public int getCardsRemaining() {
-    	return cardsRemaining.get();
+        return cardsRemaining.get();
     }
 
     /**
@@ -35,7 +37,7 @@ public class DeckOfCards {
     public void shuffle() {
         // Remove all cards
         cards.clear();
-        
+
         // Add all 52 cards
         for (Card.Suit suit : Card.Suit.values()) {
             for (Card.Rank rank : Card.Rank.values()) {
@@ -43,7 +45,7 @@ public class DeckOfCards {
                 cards.add(card);
             }
         }
-        
+
         // Shuffle
         Collections.shuffle(cards);
         cardsRemaining.setValue(cards.size());
@@ -51,11 +53,11 @@ public class DeckOfCards {
 
     /**
      * Take one card from the deck and return it
-     * 
+     * <p>
      * This is an example of conditional assignment
      */
     public Card dealCard() {
-        Card card = (cards.size() > 0) ? cards.remove(cards.size()-1) : null;
+        Card card = (cards.size() > 0) ? cards.remove(cards.size() - 1) : null;
         cardsRemaining.setValue(cards.size());
         return card;
     }
