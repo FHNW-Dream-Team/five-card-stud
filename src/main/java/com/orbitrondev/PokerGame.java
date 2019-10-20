@@ -7,7 +7,8 @@ import com.orbitrondev.Model.PokerGameModel;
 import com.orbitrondev.View.PokerGameView;
 
 public class PokerGame extends Application {
-    public static final int NUM_PLAYERS = 2;
+    public static final int MIN_PLAYERS = 2;
+    public static final int MAX_PLAYERS = 10; // Max of 52 cards, divided by 5 cards per player, makes it possible for 10 players to play
 
     public static void main(String[] args) {
         launch();

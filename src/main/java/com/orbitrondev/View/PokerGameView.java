@@ -1,5 +1,6 @@
 package com.orbitrondev.View;
 
+import com.orbitrondev.Model.Player;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -24,10 +25,8 @@ public class PokerGameView {
 
         // Create all of the player panes we need, and put them into an HBox
         players = new HBox();
-        for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
-            PlayerPane pp = new PlayerPane();
-            pp.setPlayer(model.getPlayer(i)); // link to player object in the logic
-            players.getChildren().add(pp);
+        for (int i = 0; i < model.getPlayerCount(); i++) {
+            addPlayerToView(i);
         }
         table.getChildren().add(players);
 
@@ -41,7 +40,7 @@ public class PokerGameView {
         root.setBottom(controls);
 
         // Disallow resizing - which is difficult to get right with images
-        stage.setResizable(false);
+        //stage.setResizable(false);
 
         // Create the scene using our layout; then display it
         Scene scene = new Scene(root);
@@ -53,6 +52,22 @@ public class PokerGameView {
 
     public PlayerPane getPlayerPane(int i) {
         return (PlayerPane) players.getChildren().get(i);
+    }
+
+    public void addPlayerToView(int playerId) {
+        PlayerPane pp = new PlayerPane();
+        pp.setPlayer(model.getPlayer(playerId)); // link to player object in the logic
+        players.getChildren().add(pp);
+    }
+
+    public void addPlayerToView(Player player) {
+        PlayerPane pp = new PlayerPane();
+        pp.setPlayer(player); // link to player object in the logic
+        players.getChildren().add(pp);
+    }
+
+    public Button getAddPlayerButton() {
+        return controls.btnAddPlayer;
     }
 
     public Button getShuffleButton() {
