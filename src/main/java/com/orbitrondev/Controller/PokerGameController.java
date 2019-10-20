@@ -10,6 +10,8 @@ import com.orbitrondev.View.PokerGameView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
@@ -63,6 +65,8 @@ public class PokerGameController {
         dialog.setTitle("Add new player");
         dialog.setHeaderText(null);
         dialog.setContentText("Please enter your name:");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/images/icon.png").toString()));
 
         Optional<String> result = dialog.showAndWait();
 
@@ -77,6 +81,8 @@ public class PokerGameController {
         alert.setTitle("Max player count reached");
         alert.setHeaderText(null);
         alert.setContentText("I'm sorry but only 10 players are allowed to play in a lobby");
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/images/icon.png").toString()));
 
         alert.showAndWait();
     }

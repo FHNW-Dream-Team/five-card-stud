@@ -23,6 +23,7 @@ Please make sure to update tests as appropriate.
 + Initialized Project and prepared all files
 + Added function to add player to lobby
 + Let the first two players also choose a username
++ Add an icon to all windows
 
 **by Sasa Trajkova**
 
