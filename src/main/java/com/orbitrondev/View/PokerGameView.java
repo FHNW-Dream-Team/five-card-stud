@@ -46,7 +46,7 @@ public class PokerGameView {
         // Create the scene using our layout; then display it
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/poker.css").toExternalForm());
-        stage.setTitle("Poker Miniproject");
+        stage.setTitle("Five Card Stud");
         stage.setScene(scene);
         stage.show();
     }
