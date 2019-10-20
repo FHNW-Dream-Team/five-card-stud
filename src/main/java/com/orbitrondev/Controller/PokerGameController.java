@@ -21,27 +21,43 @@ public class PokerGameController {
         this.model = model;
         this.view = view;
 
+        // Add players until two are ready
+        while (model.getPlayerCount() < PokerGame.MIN_PLAYERS) {
+            addPlayer();
+        }
+
+        // Add an event for all buttons
         view.getAddPlayerButton().setOnAction(e -> addPlayer());
         view.getShuffleButton().setOnAction(e -> shuffle());
         view.getDealButton().setOnAction(e -> deal());
     }
 
+    /**
+     * Add a new player to "model" and "view"
+     */
     private void addPlayer() {
-        if (model.getPlayerCount() == PokerGame.MAX_PLAYERS) { // stop if max players reached
+        // Stop if max possible players are reached
+        if (model.getPlayerCount() == PokerGame.MAX_PLAYERS) {
             showPlayerLimitDialogue();
             return;
         }
 
         String name = showAddPlayerDialogue();
-        while (name != null && name.length() == 0) { // null means user canceled, length 0 means no user name given
+        // "null" means user canceled, length "0" means no user name given, so repeat until right
+        while (name != null && name.length() == 0) {
             name = showAddPlayerDialogue();
         }
-        if (name == null) return; // stop operation if no username was given
+        // Stop operation completely if no username was given in the dialogue
+        if (name == null) return;
 
+        // Otherwise add player
         Player newPlayer = model.addPlayer(name);
         view.addPlayerToView(newPlayer);
     }
 
+    /**
+     * Show dialogue to ask for a username
+     */
     private String showAddPlayerDialogue() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Add new player");
@@ -53,6 +69,9 @@ public class PokerGameController {
         return result.orElse(null);
     }
 
+    /**
+     * Show a dialogue that no more players can be added
+     */
     private void showPlayerLimitDialogue() {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Max player count reached");

@@ -22,6 +22,7 @@ Please make sure to update tests as appropriate.
 **by Manuele Vaccari**
 + Initialized Project and prepared all files
 + Added function to add player to lobby
++ Let the first two players also choose a username
 
 **by Sasa Trajkova**
 

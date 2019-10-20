@@ -7,22 +7,23 @@ import com.orbitrondev.PokerGame;
 public class PokerGameModel {
     private final ArrayList<Player> players = new ArrayList<>();
     private DeckOfCards deck;
-    private int lastGeneratedNumberForName = 0; // so the first name starts with 1
+
+    // so the first generated name starts with 1
+    private int lastGeneratedNumberForName = 0;
 
     public PokerGameModel() {
-        for (int i = 0; i < PokerGame.MIN_PLAYERS; i++) {
-            addPlayer(null);
-        }
-
         deck = new DeckOfCards();
     }
 
+    /**
+     * Add a player to the "model"
+     */
     public Player addPlayer(String name) {
         if (players.size() == PokerGame.MAX_PLAYERS) { // stop if max players reached
             return null;
         }
 
-        Player newPlayer = null;
+        Player newPlayer;
         if (name == null || name.length() == 0) {
             // add player with a generated name
             lastGeneratedNumberForName += 1;

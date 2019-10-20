@@ -27,9 +27,6 @@ public class PokerGameView {
 
         // Create all of the player panes we need, and put them into an HBox
         players = new HBox();
-        for (int i = 0; i < model.getPlayerCount(); i++) {
-            addPlayerToView(i);
-        }
         table.getChildren().add(players);
 
         // Create the control area
@@ -60,15 +57,10 @@ public class PokerGameView {
         return (PlayerPane) players.getChildren().get(i);
     }
 
-    public void addPlayerToView(int playerId) {
-        PlayerPane pp = new PlayerPane();
-        pp.setPlayer(model.getPlayer(playerId)); // link to player object in the logic
-        players.getChildren().add(pp);
-    }
-
     public void addPlayerToView(Player player) {
         PlayerPane pp = new PlayerPane();
-        pp.setPlayer(player); // link to player object in the logic
+        // link to player object in the logic
+        pp.setPlayer(player);
         players.getChildren().add(pp);
     }
 
