@@ -16,6 +16,8 @@ public class PokerGameView {
 
     private PokerGameModel model;
 
+    private Stage stage = null;
+
     public PokerGameView(Stage stage, PokerGameModel model) {
         this.model = model;
 
@@ -45,8 +47,12 @@ public class PokerGameView {
         // Create the scene using our layout; then display it
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/poker.css").toExternalForm());
-        stage.setTitle("Five Card Stud");
-        stage.setScene(scene);
+        this.stage = stage;
+        this.stage.setTitle("Five Card Stud");
+        this.stage.setScene(scene);
+    }
+
+    public void show() {
         stage.show();
     }
 

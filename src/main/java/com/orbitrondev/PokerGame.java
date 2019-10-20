@@ -20,5 +20,6 @@ public class PokerGame extends Application {
         PokerGameModel model = new PokerGameModel();
         PokerGameView view = new PokerGameView(primaryStage, model);
         new PokerGameController(model, view);
+        view.show();
     }
 }
