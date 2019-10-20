@@ -99,7 +99,7 @@ public class PokerGameController {
             alert.setTitle("Not enough cards");
             alert.setHeaderText(null);
             alert.setContentText("Not enough cards - shuffle first");
-            
+
             alert.showAndWait();
         }
     }
