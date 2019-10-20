@@ -18,6 +18,10 @@
     -fx-border-width: 2.0px;
 }
 
+.player-text {
+    -fx-text-fill: white;
+}
+
 .card {
     -fx-font-size: 18px;
     -fx-padding: 2.0px;
