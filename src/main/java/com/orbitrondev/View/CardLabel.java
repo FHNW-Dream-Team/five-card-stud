@@ -14,7 +14,7 @@ public class CardLabel extends Label {
     public void setCard(Card card) {
         if (card != null) {
             String fileName = cardToFileName(card);
-            Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("images/" + fileName));
+            Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("images-cards/" + fileName));
             ImageView imv = new ImageView(image);
             imv.fitWidthProperty().bind(this.widthProperty());
             imv.fitHeightProperty().bind(this.heightProperty());
