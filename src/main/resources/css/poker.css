@@ -31,3 +31,12 @@
     -fx-pref-height: 162;
     -fx-max-height: 800;
 }
+
+.table {
+    -fx-padding: 0;
+    -fx-background-image: url("/images/background.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-overflow: hidden;
+}

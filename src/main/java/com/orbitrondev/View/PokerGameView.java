@@ -9,6 +9,7 @@ import com.orbitrondev.PokerGame;
 import com.orbitrondev.Model.PokerGameModel;
 
 public class PokerGameView {
+    private HBox table;
     private HBox players;
     private ControlArea controls;
 
@@ -17,6 +18,10 @@ public class PokerGameView {
     public PokerGameView(Stage stage, PokerGameModel model) {
         this.model = model;
 
+        // Create table
+        table = new HBox();
+        table.getStyleClass().add("table");
+
         // Create all of the player panes we need, and put them into an HBox
         players = new HBox();
         for (int i = 0; i < PokerGame.NUM_PLAYERS; i++) {
@@ -24,6 +29,7 @@ public class PokerGameView {
             pp.setPlayer(model.getPlayer(i)); // link to player object in the logic
             players.getChildren().add(pp);
         }
+        table.getChildren().add(players);
 
         // Create the control area
         controls = new ControlArea();
@@ -31,7 +37,7 @@ public class PokerGameView {
 
         // Put players and controls into a BorderPane
         BorderPane root = new BorderPane();
-        root.setCenter(players);
+        root.setCenter(table);
         root.setBottom(controls);
 
         // Disallow resizing - which is difficult to get right with images
