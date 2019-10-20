@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import com.orbitrondev.PokerGame;
 import com.orbitrondev.Model.PokerGameModel;
 
 public class PokerGameView {
@@ -66,8 +65,20 @@ public class PokerGameView {
         players.getChildren().add(pp);
     }
 
+    public void removePlayerFromView(Player playerToRemove) {
+        for (int i = 0; i < model.getPlayerCount(); i++) {
+            PlayerPane pp = getPlayerPane(i);
+            if (pp.getPlayer() != playerToRemove) continue;
+            players.getChildren().remove(pp);
+        }
+    }
+
     public Button getAddPlayerButton() {
         return controls.btnAddPlayer;
+    }
+
+    public Button getRemovePlayerButton() {
+        return controls.btnRemovePlayer;
     }
 
     public Button getShuffleButton() {

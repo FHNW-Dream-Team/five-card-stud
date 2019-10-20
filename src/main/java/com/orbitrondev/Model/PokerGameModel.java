@@ -19,7 +19,8 @@ public class PokerGameModel {
      * Add a player to the "model"
      */
     public Player addPlayer(String name) {
-        if (players.size() == PokerGame.MAX_PLAYERS) { // stop if max players reached
+        // Stop if max players reached
+        if (players.size() == PokerGame.MAX_PLAYERS) {
             return null;
         }
 
@@ -39,6 +40,22 @@ public class PokerGameModel {
 
     public Player getPlayer(int i) {
         return players.get(i);
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    /**
+     * Removes player and returns true if successful otherwise false
+     */
+    public boolean removePlayer(Player playerToDelete) {
+        for (Player player : players) {
+            if (player != playerToDelete) continue;
+            players.remove(player);
+            return true;
+        }
+        return false;
     }
 
     public int getPlayerCount() {
