@@ -25,8 +25,10 @@ Please make sure to update tests as appropriate.
 + Let the first two players also choose a username
 + Added function to remove players from the lobby
 + Add an icon to all windows
++ Added shadow
 
 **by Sasa Trajkova**
++ Added shadow color
 
 ## License
 [MIT](LICENSE.txt)
