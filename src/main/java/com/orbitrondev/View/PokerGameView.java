@@ -26,7 +26,7 @@ public class PokerGameView {
         table.getStyleClass().add("table");
 
         // Create all of the player panes we need, and put them into an HBox
-        players = new HBox();
+        players = new HBox(); // TODO: Make players pane scrollable
         table.getChildren().add(players);
 
         // Create the control area

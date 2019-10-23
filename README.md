@@ -26,6 +26,7 @@ Please make sure to update tests as appropriate.
 + Added function to remove players from the lobby
 + Add an icon to all windows
 + Added shadow
++ Close program when user cancels "Adding Player" dialog after opening the game
 
 **by Sasa Trajkova**
 + Added shadow color

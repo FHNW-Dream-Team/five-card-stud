@@ -28,7 +28,12 @@ public class PokerGameController {
 
         // Add players until two are ready
         while (model.getPlayerCount() < PokerGame.MIN_PLAYERS) {
-            addPlayer();
+            Player result = addPlayer();
+
+            // Close program if user canceled operation
+            if (result == null) {
+                System.exit(0);
+            }
         }
 
         // Add an event for all buttons
@@ -41,21 +46,22 @@ public class PokerGameController {
     /**
      * Add a new player to "model" and "view"
      */
-    private void addPlayer() {
+    private Player addPlayer() {
         // Stop if max possible players are reached
         if (model.getPlayerCount() == PokerGame.MAX_PLAYERS) {
             showPlayerLimitDialogue();
-            return;
+            return null;
         }
 
         String name = showAddPlayerDialogue();
 
         // Stop operation completely if no username was given in the dialogue
-        if (name == null) return;
+        if (name == null) return null;
 
         // Otherwise add player
         Player newPlayer = model.addPlayer(name);
         view.addPlayerToView(newPlayer);
+        return newPlayer;
     }
 
     /**
