@@ -29,6 +29,8 @@ Please make sure to update tests as appropriate.
 
 **by Sasa Trajkova**
 + Added shadow color
++ Added documentation
++ Added possibility to add players with generated names
 
 ## License
 [MIT](LICENSE.txt)

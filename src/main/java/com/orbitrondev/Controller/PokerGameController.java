@@ -49,10 +49,7 @@ public class PokerGameController {
         }
 
         String name = showAddPlayerDialogue();
-        // "null" means user canceled, length "0" means no user name given, so repeat until right
-        while (name != null && name.length() == 0) {
-            name = showAddPlayerDialogue();
-        }
+
         // Stop operation completely if no username was given in the dialogue
         if (name == null) return;
 
@@ -69,6 +66,8 @@ public class PokerGameController {
         dialog.setTitle("Add new player");
         dialog.setHeaderText(null);
         dialog.setContentText("Please enter your name:");
+
+        // Add icon to window
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(this.getClass().getResource("/images/icon.png").toString()));
 
