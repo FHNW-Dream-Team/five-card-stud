@@ -104,8 +104,8 @@ public class PokerGameController {
             player = p;
         }
 
-        model.removePlayer(player);
         view.removePlayerFromView(player);
+        model.removePlayer(player);
     }
 
     /**

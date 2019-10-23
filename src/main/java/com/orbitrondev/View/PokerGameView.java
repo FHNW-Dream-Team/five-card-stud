@@ -45,7 +45,7 @@ public class PokerGameView {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/poker.css").toExternalForm());
         this.stage = stage;
-        this.stage.getIcons().add(new Image(this.getClass().getResource("/images/icon.png").toString()));
+        this.stage.getIcons().add(new Image(this.getClass().getResource("/images/icon.png").toString())); // Add icon to window
         this.stage.setTitle("Five Card Stud");
         this.stage.setScene(scene);
     }
@@ -66,10 +66,13 @@ public class PokerGameView {
     }
 
     public void removePlayerFromView(Player playerToRemove) {
-        for (int i = 0; i < model.getPlayerCount(); i++) {
+        boolean removed = false;
+        for (int i = 0; i < model.getPlayerCount() && !removed; i++) {
             PlayerPane pp = getPlayerPane(i);
-            if (pp.getPlayer() != playerToRemove) continue;
-            players.getChildren().remove(pp);
+            if (pp.getPlayer() == playerToRemove) {
+                players.getChildren().remove(pp);
+                removed = true;
+            }
         }
     }
 
