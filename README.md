@@ -25,8 +25,10 @@ Please make sure to update tests as appropriate.
 + Let the first two players also choose a username
 + Added function to remove players from the lobby
 + Add an icon to all windows
-+ Added shadow
++ Added shadow to cards
 + Close program when user cancels "Adding Player" dialog after opening the game
++ Restyled player pane
++ Made sure players would be added by using the free space "below" (using FlowPane)
 
 **by Sasa Trajkova**
 + Added shadow color

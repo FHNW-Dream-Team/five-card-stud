@@ -13,32 +13,45 @@
 }
 
 .player {
+    /* Add a padding to the background color to give everything a little bit of space */
     -fx-padding: 5px;
-    -fx-border-color: rgb(40, 72, 45);
-    -fx-border-width: 0px 1px 1px 0px; /* TOP, RIGHT, BOTTOM, LEFT */
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 
+    /* Add a transparent background for EACH player instead of difficult-to-handle borders */
+    -fx-background-color: rgba(56, 80, 56, 0.5);
+    -fx-background-radius: 20px;
+
+    /* Otherwise the window will be unlimited high */
     -fx-max-height: 250px;
 }
 
 .player-text {
+    /* Background is darker so make text white */
     -fx-text-fill: white;
 }
 
 .card {
     -fx-font-size: 18px;
 
+    /* Add space between the cards by adding a padding to the background color */
     -fx-padding: 5px;
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
 
+    /* Add a border, just looks better */
     -fx-border-color: darkgrey;
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
+
+    /* Add a shodow for each card */
     -fx-effect: dropshadow(three-pass-box, rgb(56, 80, 56), 10, 0, 5, 5);
 
+    /* Cards are white, so make the card white */
     -fx-background-color: white;
     -fx-background-radius: 10px;
 
+    /* Make sure cards are reasonably resized (feature not yet available / also difficult to handle) */
     -fx-min-width: 50;
     -fx-pref-width: 111;
     -fx-max-width: 500;
@@ -48,6 +61,7 @@
 }
 
 .table {
+    /* Add a poker-table looking background */
     -fx-background-image: url("/images/background.png");
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
