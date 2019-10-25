@@ -68,3 +68,48 @@
     -fx-background-position: center center;
     -fx-overflow: hidden;
 }
+
+/* Scrollbar styling */
+/* The increment and decrement button for the scrollbar */
+.scroll-pane .increment-button,
+.scroll-pane .decrement-button {
+    -fx-background-color: rgb(241, 241, 241); /* lightgray color */
+    -fx-border-color: rgb(241, 241, 241); /* lightgray color */
+    -fx-padding: 5px 3px 5px 3px; /* TOP, RIGHT, BOTTOM, LEFT */
+    -fx-border-insets: 0; /* JavaFX adds an inset by default */
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .increment-button:hover,
+.scroll-pane .decrement-button:hover {
+    -fx-background-color: derive(rgb(241, 241, 241), -20%); /* gray color */
+    -fx-border-color: derive(rgb(241, 241, 241), -20%); /* gray color */
+}
+
+.scroll-pane .increment-button .increment-arrow {
+    -fx-shape: "M 100 100 L 300 100 L 200 300 z" /* triangle upwards */
+}
+
+.scroll-pane .decrement-button .decrement-arrow {
+    -fx-shape: "M 10,150 L 70,10 L 130,150 z" /* triangle downwards */
+}
+
+/* The track (under the scrollbar)  */
+.scroll-pane .scroll-bar:horizontal .track,
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: rgb(241, 241, 241); /* lightgray color */
+    -fx-border-color: rgb(241, 241, 241); /* lightgray color */
+}
+
+/* The main scrollbar which we can drag around */
+.scroll-pane .scroll-bar:horizontal .thumb,
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: rgb(193, 193, 193); /* gray color */
+    -fx-background-insets: 0, 0, 0; /* removes the "padding" */
+    -fx-background-radius: 0; /* remove the radius that JavaFX adds by default */
+}
+
+.scroll-pane .scroll-bar .thumb:hover,
+.scroll-pane .scroll-bar .thumb:pressed {
+    -fx-background-color: derive(rgb(193, 193, 193), -20%); /* darkgray color */
+}

@@ -49,6 +49,7 @@ public class PokerGameView {
         AnchorPane.setBottomAnchor(scrollPane, 0.);
         AnchorPane.setLeftAnchor(scrollPane, 0.);
         scrollPane.setContent(table);
+        scrollPane.getStyleClass().add("scroll-pane");
 
         // Create the control area
         controls = new ControlArea();
