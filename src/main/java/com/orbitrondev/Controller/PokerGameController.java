@@ -174,6 +174,7 @@ public class PokerGameController {
                 PlayerPane pp = view.getPlayerPane(i);
                 pp.updatePlayerDisplay();
             }
+            // TODO: Show popup for the player who won. Create 13 array for each rank. Find out the highest
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Not enough cards");
