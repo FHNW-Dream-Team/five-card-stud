@@ -44,6 +44,13 @@ public class Card {
             }
             return str;
         }
+
+        public boolean isNext(Card previous) {
+            int previousOrdinal = previous.rank.ordinal();
+            int nextOrdinal = this.ordinal();
+
+            return (previousOrdinal + 1) == nextOrdinal;
+        }
     }
 
     private final Suit suit;

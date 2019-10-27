@@ -29,11 +29,19 @@ Please make sure to update tests as appropriate.
 + Close program when user cancels "Adding Player" dialog after opening the game
 + Restyled player pane
 + Made sure players would be added by using the free space "below" (using FlowPane)
++ Added a sorting mechanism for isStraight evaluation
 
 **by Sasa Trajkova**
 + Added shadow color
 + Added documentation
 + Added possibility to add players with generated names
++ Added hands type evaluation and tests
+    + isThreeOfAKind
+    + isStraight
+    + isFlush
+    + isFullHouse
+    + isFourOfAKind
+    + isStraightFlush
 
 ## License
 [MIT](LICENSE.txt)

@@ -5,6 +5,31 @@ import java.util.ArrayList;
 public enum HandType {
     HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
 
+    private static ArrayList<Card> sortCards(ArrayList<Card> unsortedCards) {
+        ArrayList<Card> sortedCards = new ArrayList<>();
+
+        for (Card card : unsortedCards) {
+            if (sortedCards.size() == 0) {
+                sortedCards.add(card);
+            } else {
+                for (Card cardToCompareTo : sortedCards) {
+                    if (cardToCompareTo.getRank().ordinal() > card.getRank().ordinal()) {
+                        sortedCards.add(sortedCards.indexOf(cardToCompareTo), card);
+                        break;
+                    } else if (cardToCompareTo.getRank().ordinal() < card.getRank().ordinal()) {
+                        if (sortedCards.indexOf(cardToCompareTo) == (sortedCards.size() - 1)) { // if last element add, add the end
+                            sortedCards.add(sortedCards.indexOf(cardToCompareTo) + 1, card);
+                            break;
+                        } else {// if the element is still higher, go to next loop
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+        return sortedCards;
+    }
+
     /**
      * Determine the value of this hand. Note that this does not
      * account for any tie-breaking
@@ -54,32 +79,98 @@ public enum HandType {
     }
 
     public static boolean isThreeOfAKind(ArrayList<Card> cards) { // check for the same rank (3 cards)
-        // TODO        
+
+        //Find three cards of the same rank by comparing them
+        boolean threeOfAKindFound = false;
+        for (int i = 0; i < cards.size() - 2 && !threeOfAKindFound; i++) {
+            for (int j = i + 1; j < cards.size() - 1 && !threeOfAKindFound; j++) {
+                for (int z = j + 1; z < cards.size() && !threeOfAKindFound; z++) {
+                    if (cards.get(i).getRank() == cards.get(j).getRank() && cards.get(i).getRank() == cards.get(z).getRank()) {
+                        threeOfAKindFound = true;
+                    }
+                }
+            }
+        }
+        return threeOfAKindFound;
+    }
+
+    public static boolean isStraight(ArrayList<Card> cards) { //rank in a row (exp. 1,2,3,4,5) Ace is after the King - all 5 cards)
+
+        ArrayList<Card> sortedCards = sortCards(cards);
+
+        Card previousCard = null;
+        for (Card card : sortedCards) {
+            if (previousCard == null || card.getRank().isNext(previousCard)) {
+                previousCard = card;
+            } else return false;
+        }
+        return true;
+    }
+
+    /**
+     * Determine if all cards are of the same suit
+     */
+    public static boolean isFlush(ArrayList<Card> cards) {
+
+        if (cards.get(0).getSuit() == cards.get(1).getSuit() &&
+            cards.get(0).getSuit() == cards.get(2).getSuit() &&
+            cards.get(0).getSuit() == cards.get(3).getSuit() &&
+            cards.get(0).getSuit() == cards.get(4).getSuit()) {
+            return true;
+        }
         return false;
     }
 
-    public static boolean isStraight(ArrayList<Card> cards) { //rank in a row (exp. 1,2,3,4,5) Ace is after the King
-        // TODO        
-        return false;
+    /**
+     * Determine if there is a three of a kind and a pair
+     */
+    public static boolean isFullHouse(ArrayList<Card> cards) {
+        ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
+
+        //Find three cards of the same rank by comparing them and remove cards if three of a kind is found
+        boolean threeOfAKindFound = false;
+        for (int i = 0; i < clonedCards.size() - 2 && !threeOfAKindFound; i++) {
+            for (int j = i + 1; j < clonedCards.size() - 1 && !threeOfAKindFound; j++) {
+                for (int z = j + 1; z < clonedCards.size() && !threeOfAKindFound; z++) {
+                    if (clonedCards.get(i).getRank() == clonedCards.get(j).getRank() && clonedCards.get(i).getRank() == clonedCards.get(z).getRank()) {
+                        threeOfAKindFound = true;
+                        clonedCards.remove(i);
+                        clonedCards.remove(j);
+                        clonedCards.remove(z);
+                    }
+                }
+            }
+        }
+        return threeOfAKindFound && isOnePair(clonedCards);
     }
 
-    public static boolean isFlush(ArrayList<Card> cards) { // 5 of the same suit
-        // TODO        
-        return false;
+    /**
+     * Determine if four cards are of the same rank
+     */
+    public static boolean isFourOfAKind(ArrayList<Card> cards) {
+
+        //Find four cards of the same rank by comparing them
+        boolean fourOfAKindFound = false;
+        for (int i = 0; i < cards.size() - 3 && !fourOfAKindFound; i++) {
+            for (int j = i + 1; j < cards.size() - 2 && !fourOfAKindFound; j++) {
+                for (int z = j + 1; z < cards.size() - 1 && !fourOfAKindFound; z++) {
+                    for (int x = z + 1; x < cards.size() && !fourOfAKindFound; x++) {
+                        if (cards.get(i).getRank() == cards.get(j).getRank() &&
+                            cards.get(i).getRank() == cards.get(z).getRank() &&
+                            cards.get(i).getRank() == cards.get(x).getRank()) {
+                            fourOfAKindFound = true;
+                        }
+                    }
+                }
+            }
+        }
+        return fourOfAKindFound;
     }
 
-    public static boolean isFullHouse(ArrayList<Card> cards) { // three of a kind and a pair
-        // TODO        
-        return false;
-    }
-
-    public static boolean isFourOfAKind(ArrayList<Card> cards) { // check for the same rank (4 cards)
-        // TODO        
-        return false;
-    }
-
-    public static boolean isStraightFlush(ArrayList<Card> cards) { // is straight of the same color / suit (all 5 cards)
-        // TODO        
-        return false;
+    /**
+     * Determine if the hand is straight and has the same suit
+     */
+    public static boolean isStraightFlush(ArrayList<Card> cards) {
+        return isStraight(cards) && isFlush(cards);
     }
 }
