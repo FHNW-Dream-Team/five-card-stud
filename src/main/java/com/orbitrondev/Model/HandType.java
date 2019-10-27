@@ -104,7 +104,10 @@ public enum HandType {
 
         Card previousCard = null;
         for (Card card : sortedCards) {
-            if (previousCard == null || card.getRank().isNext(previousCard)) {
+            if (previousCard == null ||
+                card.getRank().isNext(previousCard) ||
+                (card.getRank().equals(Card.Rank.Ace) && sortedCards.get(0).getRank() == Card.Rank.Two) // Handle the case when we have a low straight and an Ace (Ordinal Nr. 12) is included
+            ) {
                 previousCard = card;
             } else return false;
         }
