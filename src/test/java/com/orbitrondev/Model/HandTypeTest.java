@@ -23,20 +23,6 @@ public class HandTypeTest {
         {"AS", "KC", "QH", "JD", "TH"}
     };
 
-    private static String[][] pairs = {
-        {"2S", "2C", "3H", "5D", "7H"},
-        {"2S", "AC", "3H", "5D", "AH"},
-        {"3S", "2C", "3H", "KD", "QH"},
-        {"9S", "2C", "2H", "5D", "7H"}
-    };
-
-    private static String[][] twoPairs = {
-        {"2S", "2C", "7H", "5D", "7H"},
-        {"2S", "AC", "5H", "5D", "AH"},
-        {"3S", "2C", "3H", "2D", "QH"},
-        {"9S", "2C", "2H", "5D", "5H"}
-    };
-
     // This is where we store the translated hands
     ArrayList<ArrayList<Card>> highCardHands;
     ArrayList<ArrayList<Card>> pairHands;
@@ -116,6 +102,13 @@ public class HandTypeTest {
      * We expect all HighCard hands to be false, all OnePair hands to
      * be true, all TwoPair hands to be true, etc.
      */
+    private static String[][] pairs = {
+        {"2S", "2C", "3H", "5D", "7H"},
+        {"2S", "AC", "3H", "5D", "AH"},
+        {"3S", "2C", "3H", "KD", "QH"},
+        {"9S", "2C", "2H", "5D", "7H"}
+    };
+
     @Test
     public void isOnePair() {
         for (ArrayList<Card> hand : highCardHands) {
@@ -132,6 +125,12 @@ public class HandTypeTest {
     /**
      * This is the test method for the isTwoPair in HandType.
      */
+    private static String[][] twoPairs = {
+        {"2S", "2C", "7H", "5D", "7H"},
+        {"2S", "AC", "5H", "5D", "AH"},
+        {"3S", "2C", "3H", "2D", "QH"},
+        {"9S", "2C", "2H", "5D", "5H"}
+    };
     @Test
     public void isTwoPair() {
         for (ArrayList<Card> hand : highCardHands) {
