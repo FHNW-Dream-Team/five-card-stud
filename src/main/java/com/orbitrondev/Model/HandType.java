@@ -16,13 +16,17 @@ public enum HandType {
                     if (cardToCompareTo.getRank().ordinal() > card.getRank().ordinal()) {
                         sortedCards.add(sortedCards.indexOf(cardToCompareTo), card);
                         break;
+
                     } else if (cardToCompareTo.getRank().ordinal() < card.getRank().ordinal()) {
-                        if (sortedCards.indexOf(cardToCompareTo) == (sortedCards.size() - 1)) { // if last element add, add the end
+                        if (sortedCards.indexOf(cardToCompareTo) == (sortedCards.size() - 1)) { // If we are checking the last element, add it at the end
                             sortedCards.add(sortedCards.indexOf(cardToCompareTo) + 1, card);
                             break;
-                        } else {// if the element is still higher, go to next loop
-                            continue;
                         }
+                        // If the element is still higher, go to next loop
+
+                    } else if (cardToCompareTo.getRank().ordinal() == card.getRank().ordinal()) { // If cards are the same rank just put it in there
+                        sortedCards.add(sortedCards.indexOf(cardToCompareTo), card);
+                        break;
                     }
                 }
             }
@@ -131,12 +135,12 @@ public enum HandType {
         boolean threeOfAKindFound = false;
         for (int i = 0; i < clonedCards.size() - 2 && !threeOfAKindFound; i++) {
             for (int j = i + 1; j < clonedCards.size() - 1 && !threeOfAKindFound; j++) {
-                for (int z = j + 1; z < clonedCards.size() && !threeOfAKindFound; z++) {
-                    if (clonedCards.get(i).getRank() == clonedCards.get(j).getRank() && clonedCards.get(i).getRank() == clonedCards.get(z).getRank()) {
+                for (int k = j + 1; k < clonedCards.size() && !threeOfAKindFound; k++) {
+                    if (clonedCards.get(i).getRank() == clonedCards.get(j).getRank() && clonedCards.get(i).getRank() == clonedCards.get(k).getRank()) {
                         threeOfAKindFound = true;
-                        clonedCards.remove(i);
+                        clonedCards.remove(k); // Delete from behind to forward, otherwise arrays keep getting shifted
                         clonedCards.remove(j);
-                        clonedCards.remove(z);
+                        clonedCards.remove(i);
                     }
                 }
             }

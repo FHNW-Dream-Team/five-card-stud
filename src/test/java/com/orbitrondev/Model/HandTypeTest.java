@@ -48,7 +48,7 @@ public class HandTypeTest {
         {"2S", "3C", "4H", "5D", "6H"},
         {"5S", "6C", "7H", "8D", "9H"},
         {"JS", "QC", "KH", "AD", "TH"},
-        {"JS", "QC", "KH", "AD", "2H"}
+        {"3S", "4C", "5H", "AD", "2H"}
     };
 
     private static String[][] flush = {
