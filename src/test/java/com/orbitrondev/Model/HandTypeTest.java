@@ -24,71 +24,77 @@ public class HandTypeTest {
     };
 
     private static String[][] pairs = {
-        {"2S", "2C", "3H", "5D", "7H"},
-        {"2S", "AC", "3H", "5D", "AH"},
-        {"3S", "2C", "3H", "KD", "QH"},
-        {"9S", "2C", "2H", "5D", "7H"}
+        {"2S", "2C", "3H", "5D", "7H"}, // A pair in order
+        {"2S", "AC", "3H", "5D", "AH"}, // A pair in a random position
+        {"3S", "2C", "3H", "KD", "QH"}, // A pair in a random position
+        {"9S", "2C", "2H", "5D", "7H"} // A pair in a random position
     };
 
     private static String[][] twoPairs = {
-        {"2S", "2C", "7H", "5D", "7H"},
-        {"2S", "AC", "5H", "5D", "AH"},
-        {"3S", "2C", "3H", "2D", "QH"},
-        {"9S", "2C", "2H", "5D", "5H"}
+        {"2S", "2C", "7H", "7D", "5H"}, // Two pairs in order
+        {"AS", "AC", "5H", "TD", "TH"}, // A space between two pairs
+        {"3S", "2C", "3H", "2D", "QH"}, // Two pairs in random position
+        {"5D", "2C", "2H", "9H", "5H"} // Two pairs in random position
     };
 
     private static String[][] threeOfAKind = {
-        {"2S", "2C", "2H", "5D", "7H"},
-        {"2S", "AC", "5S", "5D", "5H"},
-        {"3S", "3C", "3H", "2D", "QH"},
-        {"9S", "9C", "4H", "5D", "9H"}
+        {"2S", "2C", "2H", "5D", "7H"}, // A three-of-a-king in order
+        {"2S", "AC", "5S", "5D", "5H"}, // A three-of-a-king in the end
+        {"3S", "2C", "3H", "3D", "QH"}, // A three-of-a-king in random position
+        {"9S", "9C", "4H", "5D", "9H"}  // A three-of-a-king in random position
     };
 
     private static String[][] straight = {
-        {"2S", "3C", "4H", "5D", "6H"},
-        {"5S", "6C", "7H", "8D", "9H"},
-        {"JS", "QC", "KH", "AD", "TH"},
-        {"3S", "4C", "5H", "AD", "2H"}
+        {"2S", "3C", "4H", "5D", "6H"}, // A simple straight
+        {"5S", "6C", "7H", "8D", "9H"}, // Another simple straight
+        {"TS", "JC", "QH", "KD", "AH"}, // High straight 10-Ace in order
+        {"KS", "JS", "AH", "QD", "TH"}, // High straight 10-Ace with mixed up position
+        {"AS", "2C", "3H", "4D", "5H"}, // Low straight Ace-5 in order
+        {"3S", "AC", "5H", "4D", "2H"}  // Low straight Ace-5 with mixed up position
     };
 
     private static String[][] flush = {
-        {"2S", "9S", "3S", "5S", "7S"},
-        {"7C", "5C", "AC", "JC", "6C"},
-        {"2D", "3D", "4D", "5D", "7D"},
-        {"AH", "KH", "9H", "JH", "TH"}
+        {"2S", "9S", "3S", "5S", "7S"}, // A flush with all spades
+        {"7C", "5C", "AC", "JC", "6C"}, // A flush with all clubs
+        {"2D", "3D", "4D", "5D", "7D"}, // A flush with all diamonds
+        {"AH", "KH", "9H", "JH", "TH"}  // A flush with all hearts
     };
 
     private static String[][] fullHouse = {
-        {"2S", "2C", "2H", "7D", "7H"},
-        {"AS", "AC", "5S", "5D", "5H"},
-        {"3S", "3C", "3H", "2D", "2H"},
-        {"9S", "9C", "9H", "5D", "5H"}
+        {"2S", "2C", "2H", "7D", "7H"}, // First a three-of-a-kind in order followed by a pair in order
+        {"AS", "AC", "5S", "5D", "5H"}, // First a pair in order followed by a three-of-a-kind in order
+        {"3S", "2C", "3H", "2D", "3D"}, // Three-of-a-kind and pair with mixed up positions
+        {"9S", "9C", "5H", "5D", "9H"}  // Three-of-a-kind and pair with mixed up positions
     };
 
     private static String[][] fourOfAKind = {
-        {"2S", "2C", "2H", "2D", "7H"},
-        {"2S", "5C", "5S", "5D", "5H"},
-        {"3S", "3C", "3H", "3D", "7H"},
-        {"9S", "9C", "9H", "9D", "5H"}
+        {"2S", "2C", "2H", "2D", "7H"}, // A four-of-a-kind in order
+        {"2S", "5C", "5S", "5D", "5H"}, // A four-of-a-kind in order at the end
+        {"3S", "3C", "4H", "3D", "3H"}, // A four-of-a-kind in order with mixed up positions
+        {"9S", "5C", "9H", "9D", "9C"}  // A four-of-a-kind in order with mixed up positions
     };
 
     private static String[][] straightFlush = {
-        {"2S", "3S", "4S", "5S", "6S"},
-        {"5H", "6H", "7H", "8H", "9H"},
-        {"JC", "QC", "KC", "AC", "TC"},
-        {"5D", "4D", "3D", "AD", "2D"}
+        {"2S", "3S", "4S", "5S", "6S"}, // Is a straight in order with all spades
+        {"4S", "3S", "6S", "5S", "2S"}, // Is a straight with mixed up positions with all spades
+        {"5H", "6H", "7H", "8H", "9H"}, // Is a straight in order with all hearts
+        {"7H", "9H", "5H", "8H", "6H"}, // Is a straight with mixed up positions with all hearts
+        {"TC", "JC", "QC", "KC", "AC"}, // Is a straight in order with all clubs
+        {"AC", "QC", "JC", "TC", "KC"}, // Is a straight with mixed up positions with all clubs
+        {"AD", "2D", "3D", "4D", "5D"}, // Is a straight in order with all diamonds
+        {"2D", "5D", "AD", "3D", "4D"}  // Is a straight with mixed up positions with all diamonds
     };
 
     // This is where we store the translated hands
-    ArrayList<ArrayList<Card>> highCardHands;
-    ArrayList<ArrayList<Card>> pairHands;
-    ArrayList<ArrayList<Card>> twoPairHands;
-    ArrayList<ArrayList<Card>> threeOfAKindHands;
-    ArrayList<ArrayList<Card>> straightHands;
-    ArrayList<ArrayList<Card>> flushHands;
-    ArrayList<ArrayList<Card>> fullHouseHands;
-    ArrayList<ArrayList<Card>> fourOfAKindHands;
-    ArrayList<ArrayList<Card>> straightFlushHands;
+    private ArrayList<ArrayList<Card>> highCardHands;
+    private ArrayList<ArrayList<Card>> pairHands;
+    private ArrayList<ArrayList<Card>> twoPairHands;
+    private ArrayList<ArrayList<Card>> threeOfAKindHands;
+    private ArrayList<ArrayList<Card>> straightHands;
+    private ArrayList<ArrayList<Card>> flushHands;
+    private ArrayList<ArrayList<Card>> fullHouseHands;
+    private ArrayList<ArrayList<Card>> fourOfAKindHands;
+    private ArrayList<ArrayList<Card>> straightFlushHands;
 
     /**
      * Make an ArrayList of hands from an array of string-arrays
