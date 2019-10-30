@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import com.orbitrondev.Model.PokerGameModel;
 
 public class PokerGameView {
+    private BorderPane root;
     private FlowPane players;
     private ControlArea controls;
 
@@ -56,7 +57,7 @@ public class PokerGameView {
         controls.linkDeck(model.getDeck()); // link DeckLabel to DeckOfCards in the logic
 
         // Put players and controls into a BorderPane
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
         root.setCenter(scrollPane);
         root.setBottom(controls);
 
@@ -105,6 +106,29 @@ public class PokerGameView {
                 removed = true;
             }
         }
+    }
+
+    public void setWindowMaxHeight(double pixels) {
+        // DO NOT SET HEIGHT! When there are too many players it could become to high!
+        //stage.setHeight(pixels);
+
+        stage.setMaxHeight(pixels);
+    }
+
+    /**
+     * Calculates how long the window should according to number of players
+     */
+    public void resizeWindowHeight() {
+        double numRows = Math.ceil(model.getPlayerCount() / 2.0);
+        double windowTopHeight = 36; // The top window bar (in Windows)
+        double playerPaneHeight =
+            226 // One player pane height
+        ;
+        double controlPanelHeight =
+            37 + // The control panel itself
+            1    // The 1px border
+        ;
+        setWindowMaxHeight(windowTopHeight + (playerPaneHeight * numRows) + controlPanelHeight);
     }
 
     public Button getAddPlayerButton() {

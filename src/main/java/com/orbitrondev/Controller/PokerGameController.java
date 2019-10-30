@@ -61,6 +61,7 @@ public class PokerGameController {
         // Otherwise add player
         Player newPlayer = model.addPlayer(name);
         view.addPlayerToView(newPlayer);
+        view.resizeWindowHeight();
         return newPlayer;
     }
 
@@ -106,6 +107,7 @@ public class PokerGameController {
 
         view.removePlayerFromView(player);
         model.removePlayer(player);
+        view.resizeWindowHeight();
     }
 
     /**
