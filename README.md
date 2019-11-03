@@ -5,10 +5,14 @@ A little known game
 ## Features
 
 + Add players to game
++ Add up to 10 players (logical maximum)
 + Give users a username or generate one
 + Remove players from game
-+ Resize window depending on player count
++ Select which to remove
 + Figure out what type each hand is
++ Show who the winner is of each round
++ Resize window depending on player count
++ Nice design
 
 ## Installation
 
