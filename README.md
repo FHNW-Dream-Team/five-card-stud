@@ -18,11 +18,12 @@ A little known game
 ## Installation
 
 Use Intellij to run code
+Or download the jar and run it in the console with one command
 
 ## Usage
 
-```python
-java -jar "Whatever.jar"
+```powershell
+java -jar FiveCardStud.jar
 ```
 
 ## Contributing
@@ -42,8 +43,9 @@ Please make sure to update tests as appropriate.
 + Close program when user cancels "Adding Player" dialog after opening the game
 + Restyled player pane
 + Made sure players would be added by using the free space "below" (using FlowPane)
-+ Added a sorting mechanism for isStraight evaluation
++ Added a sorting mechanism for "isStraight" evaluation
 + Define max size a window can be resized according to player count
++ Fix "evaluateWinner" function not always working
 
 **by Sasa Trajkova**
 + Added shadow color
