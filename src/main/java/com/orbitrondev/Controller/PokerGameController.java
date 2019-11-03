@@ -1,10 +1,7 @@
 package com.orbitrondev.Controller;
 
+import com.orbitrondev.Model.*;
 import com.orbitrondev.PokerGame;
-import com.orbitrondev.Model.Card;
-import com.orbitrondev.Model.DeckOfCards;
-import com.orbitrondev.Model.Player;
-import com.orbitrondev.Model.PokerGameModel;
 import com.orbitrondev.View.PlayerPane;
 import com.orbitrondev.View.PokerGameView;
 import javafx.scene.control.Alert;
@@ -175,8 +172,9 @@ public class PokerGameController {
                 p.evaluateHand();
                 PlayerPane pp = view.getPlayerPane(i);
                 pp.updatePlayerDisplay();
+
             }
-            // TODO: Show popup for the player who won. Create 13 array for each rank. Find out the highest
+            evaluateWinner();
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Not enough cards");
@@ -185,5 +183,109 @@ public class PokerGameController {
 
             alert.showAndWait();
         }
+    }
+
+    /**
+     * Evaluate winner
+     */
+    private void evaluateWinner() {
+        ArrayList<ArrayList<Player>> winners = new ArrayList<>();
+
+        ArrayList<Player> highCardWinning = new ArrayList<>();
+        winners.add(highCardWinning);
+        ArrayList<Player> onePairWinning = new ArrayList<>();
+        winners.add(onePairWinning);
+        ArrayList<Player> twoPairWinning = new ArrayList<>();
+        winners.add(twoPairWinning);
+        ArrayList<Player> threeOfAKindWinning = new ArrayList<>();
+        winners.add(threeOfAKindWinning);
+        ArrayList<Player> straightWinning = new ArrayList<>();
+        winners.add(straightWinning);
+        ArrayList<Player> flushWinning = new ArrayList<>();
+        winners.add(flushWinning);
+        ArrayList<Player> fullHouseWinning = new ArrayList<>();
+        winners.add(fullHouseWinning);
+        ArrayList<Player> fourOfAKindWinning = new ArrayList<>();
+        winners.add(fourOfAKindWinning);
+        ArrayList<Player> straightFlushWinning = new ArrayList<>();
+        winners.add(straightFlushWinning);
+
+        for (int i = 0; i < model.getPlayerCount(); i++) {
+
+            Player player = model.getPlayer(i);
+            HandType winningHand = player.getHandType();
+
+            switch (winningHand) {
+                case HighCard:
+                    highCardWinning.add(player);
+                    break;
+                case OnePair:
+                    onePairWinning.add(player);
+                    break;
+                case TwoPair:
+                    twoPairWinning.add(player);
+                    break;
+                case ThreeOfAKind:
+                    threeOfAKindWinning.add(player);
+                    break;
+                case Straight:
+                    straightWinning.add(player);
+                    break;
+                case Flush:
+                    flushWinning.add(player);
+                    break;
+                case FullHouse:
+                    fullHouseWinning.add(player);
+                    break;
+                case FourOfAKind:
+                    fourOfAKindWinning.add(player);
+                    break;
+                case StraightFlush:
+                    straightFlushWinning.add(player);
+                    break;
+            }
+        }
+
+        ArrayList<Player> highestHandType = new ArrayList<>();
+        for (ArrayList<Player> currentHands : winners) {
+            if (!currentHands.isEmpty()) {
+                if (highestHandType.isEmpty()) {
+                    highestHandType = currentHands;
+                } else if (currentHands.get(0).compareTo(highestHandType.get(0)) == 1) {
+                    highestHandType.clear();
+                    highestHandType = currentHands;
+                }
+            }
+        }
+
+        showWinnerDialogue(highestHandType);
+    }
+
+    /**
+     * Show dialogue to show who the winner was
+     */
+    private void showWinnerDialogue(ArrayList<Player> winningPlayers) {
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Winner");
+        alert.setHeaderText(null);
+
+        if (winningPlayers.size() == 1) {
+            String winner = winningPlayers.get(0).getPlayerName();
+            alert.setContentText(winner + " won! Congratulations!");
+        } else {
+            String message = "";
+            boolean isFirstPlayer = true;
+            for (Player player : winningPlayers) {
+                if (!isFirstPlayer) {
+                    message += " & ";
+                }
+                message += player.getPlayerName();
+                isFirstPlayer = false;
+            }
+            alert.setContentText(message + " won! Congratulations!");
+        }
+
+        alert.showAndWait();
     }
 }

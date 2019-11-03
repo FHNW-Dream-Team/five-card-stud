@@ -1,11 +1,17 @@
 package com.orbitrondev.Model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public enum HandType {
     HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
 
     private static ArrayList<Card> sortCards(ArrayList<Card> unsortedCards) {
+
+        unsortedCards.sort(Comparator.comparing(Card::getRank));
+        return unsortedCards;
+
+/*      Code that we came up with on our own for how to sort the ArrayList.
         ArrayList<Card> sortedCards = new ArrayList<>();
 
         for (Card card : unsortedCards) {
@@ -31,7 +37,8 @@ public enum HandType {
                 }
             }
         }
-        return sortedCards;
+      return sortedCards;
+*/
     }
 
     /**
@@ -55,8 +62,8 @@ public enum HandType {
 
     public static boolean isOnePair(ArrayList<Card> cards) {
         boolean found = false;
-        for (int i = 0; i < cards.size() - 1 && !found; i++) { // go trough all cards except for the last one (you can`t compare it to itself)
-            for (int j = i + 1; j < cards.size() && !found; j++) { // go trough all cards except for the first one (which is already compared in the first loop)
+        for (int i = 0; i < cards.size() - 1 && !found; i++) {
+            for (int j = i + 1; j < cards.size() && !found; j++) {
                 if (cards.get(i).getRank() == cards.get(j).getRank()) found = true;
             }
         }
@@ -82,7 +89,10 @@ public enum HandType {
         return firstPairFound && isOnePair(clonedCards);
     }
 
-    public static boolean isThreeOfAKind(ArrayList<Card> cards) { // check for the same rank (3 cards)
+    /**
+     * Determine if three Cards are of the same rank
+     */
+    public static boolean isThreeOfAKind(ArrayList<Card> cards) {
 
         //Find three cards of the same rank by comparing them
         boolean threeOfAKindFound = false;
@@ -98,7 +108,10 @@ public enum HandType {
         return threeOfAKindFound;
     }
 
-    public static boolean isStraight(ArrayList<Card> cards) { //rank in a row (exp. 1,2,3,4,5) Ace is after the King - all 5 cards)
+    /**
+     * Determine if Ranks are in a row
+     */
+    public static boolean isStraight(ArrayList<Card> cards) {
 
         ArrayList<Card> sortedCards = sortCards(cards);
 

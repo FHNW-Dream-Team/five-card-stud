@@ -52,4 +52,8 @@ public class Player implements Comparable<Player> {
     public int compareTo(Player o) {
         return handType.compareTo(o.handType);
     }
+
+    public HandType getHandType(){
+        return handType;
+    }
 }

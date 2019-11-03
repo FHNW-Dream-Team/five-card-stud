@@ -51,6 +51,8 @@ Please make sure to update tests as appropriate.
     + isFullHouse
     + isFourOfAKind
     + isStraightFlush
++ Simplified the sorting method using Comparator
++ Evaluated the winner and showed the winner(s)
 
 ## License
 [MIT](LICENSE.txt)
