@@ -34,6 +34,10 @@ public class Player implements Comparable<Player> {
         return cards.size();
     }
 
+    public HandType getHandType(){
+        return handType;
+    }
+
     /**
      * If the hand has not been evaluated, but does have all cards,
      * then evaluate it.
@@ -51,9 +55,5 @@ public class Player implements Comparable<Player> {
     @Override
     public int compareTo(Player o) {
         return handType.compareTo(o.handType);
-    }
-
-    public HandType getHandType(){
-        return handType;
     }
 }

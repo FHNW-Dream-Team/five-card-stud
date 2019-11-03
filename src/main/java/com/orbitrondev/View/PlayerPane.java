@@ -20,8 +20,8 @@ public class PlayerPane extends VBox {
         this.getStyleClass().add("player"); // CSS style class
 
         // Add child nodes
-        lblName.getStyleClass().add("player-text");
-        lblEvaluation.getStyleClass().add("player-text");
+        lblName.getStyleClass().add("text-white"); // Add class to make text white
+        lblEvaluation.getStyleClass().add("text-white"); // Add class to make text white
         this.getChildren().addAll(lblName, hBoxCards, lblEvaluation);
 
         // Add CardLabels for the cards

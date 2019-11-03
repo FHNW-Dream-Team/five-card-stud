@@ -31,7 +31,7 @@ public class PokerGameView {
         table.getStyleClass().add("table");
         table.setAlignment(Pos.CENTER);
 
-        // Create all of the player panes we need, and put them into an HBox
+        // Create all of the player panes we need, and put them into an HBox (Table)
         players = new FlowPane();
         final int USER_PANEL_WIDTH =
             (5 * 111) // 5 cards with each 111 px
@@ -65,7 +65,7 @@ public class PokerGameView {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/poker.css").toExternalForm());
 
-        // Fix width to always show two columns
+        // Fix width of the window to always only show two columns
         final int WINDOW_FIXED_WIDTH = 1170;
         this.stage.setMinWidth(WINDOW_FIXED_WIDTH);
         this.stage.setWidth(WINDOW_FIXED_WIDTH);
@@ -89,6 +89,9 @@ public class PokerGameView {
         return (PlayerPane) players.getChildren().get(i);
     }
 
+    /**
+     * Add a Player (PlayerPane) to the view
+     */
     public void addPlayerToView(Player player) {
         PlayerPane pp = new PlayerPane();
         //pp.setMaxWidth(567);
@@ -97,6 +100,9 @@ public class PokerGameView {
         players.getChildren().add(pp);
     }
 
+    /**
+     * Remove a Player (PlayerPane) from the view
+     */
     public void removePlayerFromView(Player playerToRemove) {
         boolean removed = false;
         for (int i = 0; i < model.getPlayerCount() && !removed; i++) {
@@ -108,6 +114,9 @@ public class PokerGameView {
         }
     }
 
+    /**
+     * Define max height of the window
+     */
     public void setWindowMaxHeight(double pixels) {
         // DO NOT SET HEIGHT! When there are too many players it could become to high!
         //stage.setHeight(pixels);
@@ -116,7 +125,7 @@ public class PokerGameView {
     }
 
     /**
-     * Calculates how long the window should according to number of players
+     * Calculates how long the window should be according to number of players
      */
     public void resizeWindowHeight() {
         double numRows = Math.ceil(model.getPlayerCount() / 2.0);

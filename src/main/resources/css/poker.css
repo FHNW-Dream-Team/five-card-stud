@@ -22,12 +22,11 @@
     -fx-background-color: rgba(56, 80, 56, 0.5);
     -fx-background-radius: 20px;
 
-    /* Otherwise the window will be unlimited high */
+    /* Set a maximum height, otherwise the window will be unlimited high */
     -fx-max-height: 250px;
 }
 
-.player-text {
-    /* Background is darker so make text white */
+.text-white {
     -fx-text-fill: white;
 }
 
@@ -39,15 +38,10 @@
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
 
-    /* Add a border, just looks better */
-    -fx-border-color: darkgrey;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10px;
-
     /* Add a shodow for each card */
-    -fx-effect: dropshadow(three-pass-box, rgb(56, 80, 56), 10, 0, 5, 5);
+    -fx-effect: dropshadow(three-pass-box, rgb(46, 69, 46), 10, 0, 5, 5);
 
-    /* Cards are white, so make the card white */
+    /* Cards in real life are white, so make the card white in the game */
     -fx-background-color: white;
     -fx-background-radius: 10px;
 
@@ -76,7 +70,7 @@
     -fx-background-color: rgb(241, 241, 241); /* lightgray color */
     -fx-border-color: rgb(241, 241, 241); /* lightgray color */
     -fx-padding: 5px 3px 5px 3px; /* TOP, RIGHT, BOTTOM, LEFT */
-    -fx-border-insets: 0; /* JavaFX adds an inset by default */
+    -fx-border-insets: 0; /* JavaFX adds an inset by default, so remove it */
     -fx-background-insets: 0;
 }
 
@@ -84,6 +78,10 @@
 .scroll-pane .decrement-button:hover {
     -fx-background-color: derive(rgb(241, 241, 241), -20%); /* gray color */
     -fx-border-color: derive(rgb(241, 241, 241), -20%); /* gray color */
+}
+.scroll-pane .increment-button:pressed,
+.scroll-pane .decrement-button:pressed {
+    -fx-background-color: derive(rgb(193, 193, 193), -50%); /* darkgray color */
 }
 
 .scroll-pane .increment-button .increment-arrow {
@@ -105,11 +103,13 @@
 .scroll-pane .scroll-bar:horizontal .thumb,
 .scroll-pane .scroll-bar:vertical .thumb {
     -fx-background-color: rgb(193, 193, 193); /* gray color */
-    -fx-background-insets: 0, 0, 0; /* removes the "padding" */
+    -fx-background-insets: 1px, 0px, 1px, 0px; /* removes the "padding" */ /* RIGHT, TOP, LEFT, BOTTOM */
     -fx-background-radius: 0; /* remove the radius that JavaFX adds by default */
 }
 
-.scroll-pane .scroll-bar .thumb:hover,
-.scroll-pane .scroll-bar .thumb:pressed {
+.scroll-pane .scroll-bar .thumb:hover {
     -fx-background-color: derive(rgb(193, 193, 193), -20%); /* darkgray color */
+}
+.scroll-pane .scroll-bar .thumb:pressed {
+    -fx-background-color: derive(rgb(193, 193, 193), -50%); /* darkgray color */
 }

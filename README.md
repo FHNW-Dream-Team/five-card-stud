@@ -8,11 +8,12 @@ A little known game
 + Add up to 10 players (logical maximum)
 + Give users a username or generate one
 + Remove players from game
-+ Select which to remove
++ Select which player to remove
 + Figure out what type each hand is
 + Show who the winner is of each round
 + Resize window depending on player count
-+ Nice design: background, drop shadow for each card, more space between each card, added icon to all windows
++ Nice design: background, drop shadow for each card, more space between each card, added icon to all windows, scrollbar
++ Show each player what hand type they have, including: HighCard, OnePair, TwoPair, Three-of-a-kind, Straight (Low and High Straight), Flush, Full House, Four-of-a-kind and Straight flush
 + Tie-break handling for HighCard, OnePair and TwoPair - for the rest, show all winning players that have the same hand type
 
 ## Installation
@@ -27,6 +28,7 @@ java -jar FiveCardStud.jar
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
@@ -43,9 +45,10 @@ Please make sure to update tests as appropriate.
 + Close program when user cancels "Adding Player" dialog after opening the game
 + Restyled player pane
 + Made sure players would be added by using the free space "below" (using FlowPane)
-+ Added a sorting mechanism for "isStraight" evaluation
++ Added a sorting mechanism for "isStraight" evaluation (including low and high straight)
 + Define max size a window can be resized according to player count
 + Fix "evaluateWinner" function not always working
++ Added documentation
 
 **by Sasa Trajkova**
 + Added shadow color

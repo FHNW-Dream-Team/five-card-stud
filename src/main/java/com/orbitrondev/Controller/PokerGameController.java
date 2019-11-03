@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +58,7 @@ public class PokerGameController {
         // Otherwise add player
         Player newPlayer = model.addPlayer(name);
         view.addPlayerToView(newPlayer);
-        view.resizeWindowHeight();
+        view.resizeWindowHeight(); // Update maximum window size, because player count changed
         return newPlayer;
     }
 
@@ -81,8 +80,11 @@ public class PokerGameController {
         return result.orElse(null);
     }
 
+    /**
+     * Show dialogue to ask for a user to be removed
+     */
     private void removePlayer() {
-        // Stop if min required players are reached
+        // Stop if minimum required players are reached
         if (model.getPlayerCount() == PokerGame.MIN_PLAYERS) {
             showPlayerLimitDialogue();
             return;
@@ -105,7 +107,7 @@ public class PokerGameController {
 
         view.removePlayerFromView(player);
         model.removePlayer(player);
-        view.resizeWindowHeight();
+        view.resizeWindowHeight(); // Update maximum window size, because player count changed
     }
 
     /**
@@ -163,6 +165,7 @@ public class PokerGameController {
         int cardsRequired = model.getPlayerCount() * Player.HAND_SIZE;
         DeckOfCards deck = model.getDeck();
         if (cardsRequired <= deck.getCardsRemaining()) {
+            // Give each player 5 cards
             for (int i = 0; i < model.getPlayerCount(); i++) {
                 Player p = model.getPlayer(i);
                 p.discardHand();
@@ -172,9 +175,9 @@ public class PokerGameController {
                 }
                 p.evaluateHand();
                 PlayerPane pp = view.getPlayerPane(i);
-                pp.updatePlayerDisplay();
-
+                pp.updatePlayerDisplay(); // Update the view with the new cards
             }
+            // Initiate to check, who wins the round
             evaluateWinner();
         } else {
             Alert alert = new Alert(AlertType.ERROR);
@@ -192,6 +195,7 @@ public class PokerGameController {
     private void evaluateWinner() {
         ArrayList<ArrayList<Player>> winners = new ArrayList<>();
 
+        // Create array for each possible hand
         ArrayList<Player> highCardWinning = new ArrayList<>();
         winners.add(highCardWinning);
         ArrayList<Player> onePairWinning = new ArrayList<>();
@@ -247,7 +251,7 @@ public class PokerGameController {
             }
         }
 
-        // Find the highest available hand sets
+        // Find the highest available hand type
         ArrayList<Player> highestHandType = new ArrayList<>();
         for (ArrayList<Player> currentHands : winners) {
             if (!currentHands.isEmpty()) {
@@ -256,7 +260,7 @@ public class PokerGameController {
             }
         }
 
-        //Handle tie-breaks: when we have more than one of the same hand
+        // Handle tie-breaks: when we have more than one of the same hand
         if (highestHandType.size() > 1) {
             switch (highestHandType.get(0).getHandType()) {
                 case HighCard:
@@ -265,36 +269,45 @@ public class PokerGameController {
                         if (bestPlayer == null) {
                             bestPlayer = player;
                         } else if (player.getCards().get(4).getRank().ordinal() > bestPlayer.getCards().get(4).getRank().ordinal()) {
+                            // Compare the fifth card of each user
                             bestPlayer = player;
                         } else if (player.getCards().get(4).getRank().ordinal() == bestPlayer.getCards().get(4).getRank().ordinal()) {
                             if (player.getCards().get(3).getRank().ordinal() > bestPlayer.getCards().get(3).getRank().ordinal()) {
+                                // Compare the fourth card of each user
                                 bestPlayer = player;
                             } else if (player.getCards().get(3).getRank().ordinal() == bestPlayer.getCards().get(3).getRank().ordinal()) {
                                 if (player.getCards().get(2).getRank().ordinal() > bestPlayer.getCards().get(2).getRank().ordinal()) {
+                                    // Compare the third card of each user
                                     bestPlayer = player;
                                 } else if (player.getCards().get(2).getRank().ordinal() == bestPlayer.getCards().get(2).getRank().ordinal()) {
                                     if (player.getCards().get(1).getRank().ordinal() > bestPlayer.getCards().get(1).getRank().ordinal()) {
+                                        // Compare the second card of each user
                                         bestPlayer = player;
                                     } else if (player.getCards().get(1).getRank().ordinal() == bestPlayer.getCards().get(1).getRank().ordinal()) {
                                         if (player.getCards().get(0).getRank().ordinal() > bestPlayer.getCards().get(0).getRank().ordinal()) {
+                                            // Compare the first card of each user
                                             bestPlayer = player;
                                         }
+                                        // If all cards are the same rank, then both win
                                     }
                                 }
                             }
                         }
                     }
+                    // Erase all other players and assign the best player as the only one to the array
                     if (bestPlayer != null) {
                         highestHandType.clear();
                         highestHandType.add(bestPlayer);
                     }
                     break;
+
                 case OnePair:
                     Player bestOnePairPlayer = null;
                     for (Player player : highestHandType) {
                         if (bestOnePairPlayer == null) {
                             bestOnePairPlayer = player;
                         } else {
+                            // Find the pair inside the hand, and move it to another array
                             ArrayList<Card> clonedPlayer1Cards = (ArrayList<Card>) player.getCards().clone();
                             ArrayList<Card> player1PairCards = new ArrayList<>();
                             boolean firstPairFound = false;
@@ -307,6 +320,7 @@ public class PokerGameController {
                                     }
                                 }
                             }
+                            // Find the pair inside the hand of the user to compare against, and move it to another array
                             ArrayList<Card> clonedBestPairPlayerCards = (ArrayList<Card>) bestOnePairPlayer.getCards().clone();
                             ArrayList<Card> bestPairPlayerCards = new ArrayList<>();
                             firstPairFound = false;
@@ -321,22 +335,28 @@ public class PokerGameController {
                             }
 
                             if (player1PairCards.get(0).getRank().ordinal() > bestPairPlayerCards.get(0).getRank().ordinal()) {
+                                // Compare the pairs of both players
                                 bestOnePairPlayer = player;
                             } else if (player1PairCards.get(0).getRank().ordinal() == bestPairPlayerCards.get(0).getRank().ordinal()) {
                                 if (clonedPlayer1Cards.get(2).getRank().ordinal() > clonedBestPairPlayerCards.get(2).getRank().ordinal()) {
+                                    // Compare the third spare card of both players, in case pairs are the same
                                     bestOnePairPlayer = player;
                                 } else if (clonedPlayer1Cards.get(2).getRank().ordinal() == clonedBestPairPlayerCards.get(2).getRank().ordinal()) {
                                     if (clonedPlayer1Cards.get(1).getRank().ordinal() > clonedBestPairPlayerCards.get(1).getRank().ordinal()) {
+                                        // Compare the second spare card of both players
                                         bestOnePairPlayer = player;
                                     } else if (clonedPlayer1Cards.get(1).getRank().ordinal() == clonedBestPairPlayerCards.get(1).getRank().ordinal()) {
                                         if (clonedPlayer1Cards.get(0).getRank().ordinal() > clonedBestPairPlayerCards.get(0).getRank().ordinal()) {
+                                            // Compare the first spare card of both players
                                             bestOnePairPlayer = player;
                                         }
+                                        // If all cards are the same rank, then both win
                                     }
                                 }
                             }
                         }
                     }
+                    // Erase all other players and assign the best player as the only one to the array
                     if (bestOnePairPlayer != null) {
                         highestHandType.clear();
                         highestHandType.add(bestOnePairPlayer);
@@ -348,11 +368,10 @@ public class PokerGameController {
                         if (bestTwoPairPlayer == null) {
                             bestTwoPairPlayer = player;
                         } else {
+                            // Find both pairs of the player and move the cards to the appropriate new array
                             ArrayList<Card> clonedPlayerCards = (ArrayList<Card>) player.getCards().clone();
                             ArrayList<Card> highestTwoPairPlayerCards = new ArrayList<>();
                             ArrayList<Card> lowestTwoPairPlayerCards = new ArrayList<>();
-
-                            //find two pairs and remove the cards and add them to the appropriate new array
                             boolean firstPairFound = false;
                             for (int i = 0; i < clonedPlayerCards.size() - 1 && !firstPairFound; i++) {
                                 for (int j = i + 1; j < clonedPlayerCards.size() && !firstPairFound; j++) {
@@ -379,10 +398,11 @@ public class PokerGameController {
                                             lowestTwoPairPlayerCards.add(card1);
                                             lowestTwoPairPlayerCards.add(card2);
                                         }
-
                                     }
                                 }
                             }
+
+                            // Find both pairs of the player to compare against and move the cards to the appropriate new array
                             ArrayList<Card> clonedBestTwoPairPlayerCards = (ArrayList<Card>) bestTwoPairPlayer.getCards().clone();
                             ArrayList<Card> highestBestTwoPairPlayerCards = new ArrayList<>();
                             ArrayList<Card> lowestBestTwoPairPlayerCards = new ArrayList<>();
@@ -417,38 +437,48 @@ public class PokerGameController {
                             }
 
                             if (highestTwoPairPlayerCards.get(0).getRank().ordinal() > highestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
+                                // Compare the higher pairs of both players
                                 bestTwoPairPlayer = player;
                             } else if (highestTwoPairPlayerCards.get(0).getRank().ordinal() == highestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
                                 if (lowestTwoPairPlayerCards.get(0).getRank().ordinal() > lowestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
+                                    // Compare the lower pairs of both players
                                     bestTwoPairPlayer = player;
                                 } else if (lowestTwoPairPlayerCards.get(0).getRank().ordinal() == lowestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
                                     if (clonedPlayerCards.get(0).getRank().ordinal() > clonedBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
+                                        // Compare the last spare card of both players, in case all pairs are the same
                                         bestTwoPairPlayer = player;
                                     }
                                 }
                             }
                         }
                     }
+                    // Erase all other players and assign the best player as the only one to the array
                     if (bestTwoPairPlayer != null) {
                         highestHandType.clear();
                         highestHandType.add(bestTwoPairPlayer);
                     }
                     break;
+
                 case ThreeOfAKind:
                     // TODO
                     break;
+
                 case Straight:
                     // TODO
                     break;
+
                 case Flush:
                     // TODO
                     break;
+
                 case FullHouse:
                     // TODO
                     break;
+
                 case FourOfAKind:
                     // TODO
                     break;
+
                 case StraightFlush:
                     // TODO
                     break;
@@ -467,9 +497,11 @@ public class PokerGameController {
         alert.setHeaderText(null);
 
         if (winningPlayers.size() == 1) {
+            // Show text if there is only one winner
             String winner = winningPlayers.get(0).getPlayerName();
             alert.setContentText(winner + " won! Congratulations!");
         } else {
+            // Show text if there is more than one winner
             String message = "";
             boolean isFirstPlayer = true;
             for (Player player : winningPlayers) {

@@ -8,11 +8,11 @@ public class PokerGameModel {
     private final ArrayList<Player> players = new ArrayList<>();
     private DeckOfCards deck;
 
-    // so the first generated name starts with 1
+    // So the first generated name starts with 1
     private int lastGeneratedNumberForName = 0;
 
     public PokerGameModel() {
-        deck = new DeckOfCards();
+        deck = new DeckOfCards(); // When initiating instantly create a deck with 52 cards
     }
 
     /**
@@ -26,11 +26,11 @@ public class PokerGameModel {
 
         Player newPlayer;
         if (name == null || name.length() == 0) {
-            // add player with a generated name
+            // Add player with a generated name
             lastGeneratedNumberForName += 1;
             newPlayer = new Player("Player " + lastGeneratedNumberForName);
         } else {
-            // add player with a given name
+            // Add player with a given name
             newPlayer = new Player(name);
         }
 
@@ -38,10 +38,16 @@ public class PokerGameModel {
         return newPlayer;
     }
 
+    /**
+     * Get one player by their index number inside the ArrayList
+     */
     public Player getPlayer(int i) {
         return players.get(i);
     }
 
+    /**
+     * Get an ArrayList with all the players inside
+     */
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -58,6 +64,9 @@ public class PokerGameModel {
         return false;
     }
 
+    /**
+     * Get a number of how many players are present
+     */
     public int getPlayerCount() {
         return players.size();
     }

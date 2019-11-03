@@ -7,13 +7,11 @@ public enum HandType {
     HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
 
     private static ArrayList<Card> sortCards(ArrayList<Card> unsortedCards) {
-
         unsortedCards.sort(Comparator.comparing(Card::getRank));
         return unsortedCards;
-
-/*      Code that we came up with on our own for how to sort the ArrayList.
-        ArrayList<Card> sortedCards = new ArrayList<>();
-
+        /*
+         * Code that we came up with on our own for how to sort the ArrayList.
+         * ArrayList<Card> sortedCards = new ArrayList<>();
         for (Card card : unsortedCards) {
             if (sortedCards.size() == 0) {
                 sortedCards.add(card);
@@ -37,8 +35,8 @@ public enum HandType {
                 }
             }
         }
-      return sortedCards;
-*/
+        return sortedCards;
+        */
     }
 
     /**
@@ -94,7 +92,7 @@ public enum HandType {
      */
     public static boolean isThreeOfAKind(ArrayList<Card> cards) {
 
-        //Find three cards of the same rank by comparing them
+        // Find three cards of the same rank by comparing them
         boolean threeOfAKindFound = false;
         for (int i = 0; i < cards.size() - 2 && !threeOfAKindFound; i++) {
             for (int j = i + 1; j < cards.size() - 1 && !threeOfAKindFound; j++) {
@@ -131,7 +129,6 @@ public enum HandType {
      * Determine if all cards are of the same suit
      */
     public static boolean isFlush(ArrayList<Card> cards) {
-
         if (cards.get(0).getSuit() == cards.get(1).getSuit() &&
             cards.get(0).getSuit() == cards.get(2).getSuit() &&
             cards.get(0).getSuit() == cards.get(3).getSuit() &&
@@ -147,7 +144,7 @@ public enum HandType {
     public static boolean isFullHouse(ArrayList<Card> cards) {
         ArrayList<Card> clonedCards = (ArrayList<Card>) cards.clone();
 
-        //Find three cards of the same rank by comparing them and remove cards if three of a kind is found
+        // Find three cards of the same rank by comparing them and remove cards if three of a kind is found
         boolean threeOfAKindFound = false;
         for (int i = 0; i < clonedCards.size() - 2 && !threeOfAKindFound; i++) {
             for (int j = i + 1; j < clonedCards.size() - 1 && !threeOfAKindFound; j++) {
@@ -169,15 +166,15 @@ public enum HandType {
      */
     public static boolean isFourOfAKind(ArrayList<Card> cards) {
 
-        //Find four cards of the same rank by comparing them
+        // Find four cards of the same rank by comparing them
         boolean fourOfAKindFound = false;
         for (int i = 0; i < cards.size() - 3 && !fourOfAKindFound; i++) {
             for (int j = i + 1; j < cards.size() - 2 && !fourOfAKindFound; j++) {
-                for (int z = j + 1; z < cards.size() - 1 && !fourOfAKindFound; z++) {
-                    for (int x = z + 1; x < cards.size() && !fourOfAKindFound; x++) {
+                for (int k = j + 1; k < cards.size() - 1 && !fourOfAKindFound; k++) {
+                    for (int l = k + 1; l < cards.size() && !fourOfAKindFound; l++) {
                         if (cards.get(i).getRank() == cards.get(j).getRank() &&
-                            cards.get(i).getRank() == cards.get(z).getRank() &&
-                            cards.get(i).getRank() == cards.get(x).getRank()) {
+                            cards.get(i).getRank() == cards.get(k).getRank() &&
+                            cards.get(i).getRank() == cards.get(l).getRank()) {
                             fourOfAKindFound = true;
                         }
                     }
