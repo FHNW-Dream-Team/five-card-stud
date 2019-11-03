@@ -249,12 +249,8 @@ public class PokerGameController {
         ArrayList<Player> highestHandType = new ArrayList<>();
         for (ArrayList<Player> currentHands : winners) {
             if (!currentHands.isEmpty()) {
-                if (highestHandType.isEmpty()) {
-                    highestHandType = currentHands;
-                } else if (currentHands.get(0).compareTo(highestHandType.get(0)) == 1) {
-                    highestHandType.clear();
-                    highestHandType = currentHands;
-                }
+                highestHandType.clear();
+                highestHandType = currentHands;
             }
         }
 
@@ -265,7 +261,6 @@ public class PokerGameController {
      * Show dialogue to show who the winner was
      */
     private void showWinnerDialogue(ArrayList<Player> winningPlayers) {
-
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Winner");
         alert.setHeaderText(null);
