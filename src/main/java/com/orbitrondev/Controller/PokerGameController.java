@@ -255,6 +255,7 @@ public class PokerGameController {
             }
         }
 
+        //Handle tie-breaks: when we have more than one of the same hand
         if (highestHandType.size() > 1) {
             switch (highestHandType.get(0).getHandType()) {
                 case HighCard:
@@ -494,6 +495,8 @@ public class PokerGameController {
             alert.setContentText(message + " won! Congratulations!");
         }
 
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/images/icon.png").toString()));
         alert.showAndWait();
     }
 }

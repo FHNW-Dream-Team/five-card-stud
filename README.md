@@ -12,8 +12,8 @@ A little known game
 + Figure out what type each hand is
 + Show who the winner is of each round
 + Resize window depending on player count
-+ Nice design: background, drop shadow for each card, more space between each card, added icon to the window
-+ Tie-break handling for HighCard, OnePair and TwoPair
++ Nice design: background, drop shadow for each card, more space between each card, added icon to all windows
++ Tie-break handling for HighCard, OnePair and TwoPair - for the rest, show all winning players that have the same hand type
 
 ## Installation
 
