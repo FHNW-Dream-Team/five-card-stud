@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -251,6 +252,218 @@ public class PokerGameController {
             if (!currentHands.isEmpty()) {
                 highestHandType.clear();
                 highestHandType = currentHands;
+            }
+        }
+
+        if (highestHandType.size() > 1) {
+            switch (highestHandType.get(0).getHandType()) {
+                case HighCard:
+                    Player bestPlayer = null;
+                    for (Player player : highestHandType) {
+                        player.getCards().sort(Comparator.comparing(Card::getRank));
+                        if (bestPlayer != null) {
+                            bestPlayer.getCards().sort(Comparator.comparing(Card::getRank));
+                        }
+                        if (bestPlayer == null) {
+                            bestPlayer = player;
+                        } else if (player.getCards().get(4).getRank().compareTo(bestPlayer.getCards().get(4).getRank()) == 1) {
+                            bestPlayer = player;
+                        } else if (player.getCards().get(4).getRank().compareTo(bestPlayer.getCards().get(4).getRank()) == 0) {
+                            if (player.getCards().get(3).getRank().compareTo(bestPlayer.getCards().get(3).getRank()) == 1) {
+                                bestPlayer = player;
+                            } else if (player.getCards().get(3).getRank().compareTo(bestPlayer.getCards().get(3).getRank()) == 0) {
+                                if (player.getCards().get(2).getRank().compareTo(bestPlayer.getCards().get(2).getRank()) == 1) {
+                                    bestPlayer = player;
+                                } else if (player.getCards().get(2).getRank().compareTo(bestPlayer.getCards().get(2).getRank()) == 0) {
+                                    if (player.getCards().get(1).getRank().compareTo(bestPlayer.getCards().get(1).getRank()) == 1) {
+                                        bestPlayer = player;
+                                    } else if (player.getCards().get(1).getRank().compareTo(bestPlayer.getCards().get(1).getRank()) == 0) {
+                                        if (player.getCards().get(0).getRank().compareTo(bestPlayer.getCards().get(0).getRank()) == 1) {
+                                            bestPlayer = player;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (bestPlayer != null) {
+                        highestHandType.clear();
+                        highestHandType.add(bestPlayer);
+                    }
+                    break;
+                case OnePair:
+                    Player bestOnePairPlayer = null;
+                    for (Player player : highestHandType) {
+                        player.getCards().sort(Comparator.comparing(Card::getRank));
+                        if (bestOnePairPlayer != null) {
+                            bestOnePairPlayer.getCards().sort(Comparator.comparing(Card::getRank));
+                        }
+
+                        if (bestOnePairPlayer == null) {
+                            bestOnePairPlayer = player;
+                        } else {
+                            ArrayList<Card> clonedPlayer1Cards = (ArrayList<Card>) player.getCards().clone();
+                            ArrayList<Card> player1PairCards = new ArrayList<>();
+                            boolean firstPairFound = false;
+                            for (int i = 0; i < clonedPlayer1Cards.size() - 1 && !firstPairFound; i++) {
+                                for (int j = i + 1; j < clonedPlayer1Cards.size() && !firstPairFound; j++) {
+                                    if (clonedPlayer1Cards.get(i).getRank() == clonedPlayer1Cards.get(j).getRank()) {
+                                        firstPairFound = true;
+                                        player1PairCards.add(clonedPlayer1Cards.remove(j));
+                                        player1PairCards.add(clonedPlayer1Cards.remove(i));
+                                    }
+                                }
+                            }
+                            ArrayList<Card> clonedBestPairPlayerCards = (ArrayList<Card>) bestOnePairPlayer.getCards().clone();
+                            ArrayList<Card> bestPairPlayerCards = new ArrayList<>();
+                            firstPairFound = false;
+                            for (int i = 0; i < clonedBestPairPlayerCards.size() - 1 && !firstPairFound; i++) {
+                                for (int j = i + 1; j < clonedBestPairPlayerCards.size() && !firstPairFound; j++) {
+                                    if (clonedBestPairPlayerCards.get(i).getRank() == clonedBestPairPlayerCards.get(j).getRank()) {
+                                        firstPairFound = true;
+                                        bestPairPlayerCards.add(clonedBestPairPlayerCards.remove(j));
+                                        bestPairPlayerCards.add(clonedBestPairPlayerCards.remove(i));
+                                    }
+                                }
+                            }
+
+                            if (player1PairCards.get(0).getRank().compareTo(bestPairPlayerCards.get(0).getRank()) == 1) {
+                                bestOnePairPlayer = player;
+                            } else if (player1PairCards.get(0).getRank().compareTo(bestPairPlayerCards.get(0).getRank()) == 0) {
+                                if (clonedPlayer1Cards.get(2).getRank().compareTo(clonedBestPairPlayerCards.get(2).getRank()) == 1) {
+                                    bestOnePairPlayer = player;
+                                } else if (clonedPlayer1Cards.get(2).getRank().compareTo(clonedBestPairPlayerCards.get(2).getRank()) == 0) {
+                                    if (clonedPlayer1Cards.get(1).getRank().compareTo(clonedBestPairPlayerCards.get(1).getRank()) == 1) {
+                                        bestOnePairPlayer = player;
+                                    } else if (clonedPlayer1Cards.get(1).getRank().compareTo(clonedBestPairPlayerCards.get(1).getRank()) == 0) {
+                                        if (clonedPlayer1Cards.get(0).getRank().compareTo(clonedBestPairPlayerCards.get(0).getRank()) == 1) {
+                                            bestOnePairPlayer = player;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (bestOnePairPlayer != null) {
+                        highestHandType.clear();
+                        highestHandType.add(bestOnePairPlayer);
+                    }
+                    break;
+                case TwoPair:
+                    Player bestTwoPairPlayer = null;
+                    for (Player player : highestHandType) {
+                        player.getCards().sort(Comparator.comparing(Card::getRank));
+                        if (bestTwoPairPlayer != null) {
+                            bestTwoPairPlayer.getCards().sort(Comparator.comparing(Card::getRank));
+                        }
+
+                        if (bestTwoPairPlayer == null) {
+                            bestTwoPairPlayer = player;
+                        } else {
+                            ArrayList<Card> clonedPlayerCards = (ArrayList<Card>) player.getCards().clone();
+                            ArrayList<Card> highestTwoPairPlayerCards = new ArrayList<>();
+                            ArrayList<Card> lowestTwoPairPlayerCards = new ArrayList<>();
+
+                            //find two pairs and remove the cards and add them to the appropriate new array
+                            boolean firstPairFound = false;
+                            for (int i = 0; i < clonedPlayerCards.size() - 1 && !firstPairFound; i++) {
+                                for (int j = i + 1; j < clonedPlayerCards.size() && !firstPairFound; j++) {
+                                    if (clonedPlayerCards.get(i).getRank() == clonedPlayerCards.get(j).getRank()) {
+                                        firstPairFound = true;
+                                        highestTwoPairPlayerCards.add(clonedPlayerCards.remove(j));
+                                        highestTwoPairPlayerCards.add(clonedPlayerCards.remove(i));
+                                    }
+                                }
+                            }
+                            boolean secondPairFound = false;
+                            for (int i = 0; i < clonedPlayerCards.size() - 1 && !secondPairFound; i++) {
+                                for (int j = i + 1; j < clonedPlayerCards.size() && !secondPairFound; j++) {
+                                    if (clonedPlayerCards.get(i).getRank() == clonedPlayerCards.get(j).getRank()) {
+                                        secondPairFound = true;
+                                        Card card1 = clonedPlayerCards.remove(j);
+                                        Card card2 = clonedPlayerCards.remove(i);
+                                        if (highestTwoPairPlayerCards.get(0).getRank().compareTo(card1.getRank()) == -1) {
+                                            lowestTwoPairPlayerCards = highestTwoPairPlayerCards;
+                                            highestTwoPairPlayerCards.clear();
+                                            highestTwoPairPlayerCards.add(card1);
+                                            highestTwoPairPlayerCards.add(card2);
+                                        } else {
+                                            lowestTwoPairPlayerCards.add(card1);
+                                            lowestTwoPairPlayerCards.add(card2);
+                                        }
+
+                                    }
+                                }
+                            }
+                            ArrayList<Card> clonedBestTwoPairPlayerCards = (ArrayList<Card>) bestTwoPairPlayer.getCards().clone();
+                            ArrayList<Card> highestBestTwoPairPlayerCards = new ArrayList<>();
+                            ArrayList<Card> lowestBestTwoPairPlayerCards = new ArrayList<>();
+                            firstPairFound = false;
+                            for (int i = 0; i < clonedBestTwoPairPlayerCards.size() - 1 && !firstPairFound; i++) {
+                                for (int j = i + 1; j < clonedBestTwoPairPlayerCards.size() && !firstPairFound; j++) {
+                                    if (clonedBestTwoPairPlayerCards.get(i).getRank() == clonedBestTwoPairPlayerCards.get(j).getRank()) {
+                                        firstPairFound = true;
+                                        highestBestTwoPairPlayerCards.add(clonedBestTwoPairPlayerCards.remove(j));
+                                        highestBestTwoPairPlayerCards.add(clonedBestTwoPairPlayerCards.remove(i));
+                                    }
+                                }
+                            }
+                            secondPairFound = false;
+                            for (int i = 0; i < clonedBestTwoPairPlayerCards.size() - 1 && !secondPairFound; i++) {
+                                for (int j = i + 1; j < clonedBestTwoPairPlayerCards.size() && !secondPairFound; j++) {
+                                    if (clonedBestTwoPairPlayerCards.get(i).getRank() == clonedBestTwoPairPlayerCards.get(j).getRank()) {
+                                        secondPairFound = true;
+                                        Card card1 = clonedBestTwoPairPlayerCards.remove(j);
+                                        Card card2 = clonedBestTwoPairPlayerCards.remove(i);
+                                        if (highestBestTwoPairPlayerCards.get(0).getRank().compareTo(card1.getRank()) == -1) {
+                                            lowestBestTwoPairPlayerCards = highestBestTwoPairPlayerCards;
+                                            highestBestTwoPairPlayerCards.clear();
+                                            highestBestTwoPairPlayerCards.add(card1);
+                                            highestBestTwoPairPlayerCards.add(card2);
+                                        } else {
+                                            lowestBestTwoPairPlayerCards.add(card1);
+                                            lowestBestTwoPairPlayerCards.add(card2);
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (highestTwoPairPlayerCards.get(0).getRank().compareTo(highestBestTwoPairPlayerCards.get(0).getRank()) == 1) {
+                                bestTwoPairPlayer = player;
+                            } else if (highestTwoPairPlayerCards.get(0).getRank().compareTo(highestBestTwoPairPlayerCards.get(0).getRank()) == 0) {
+                                if (lowestTwoPairPlayerCards.get(0).getRank().compareTo(lowestBestTwoPairPlayerCards.get(0).getRank()) == 1) {
+                                    bestTwoPairPlayer = player;
+                                } else if (lowestTwoPairPlayerCards.get(0).getRank().compareTo(lowestBestTwoPairPlayerCards.get(0).getRank()) == 0) {
+                                    if (clonedPlayerCards.get(0).getRank().compareTo(clonedBestTwoPairPlayerCards.get(0).getRank()) == 1) {
+                                        bestTwoPairPlayer = player;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (bestTwoPairPlayer != null) {
+                        highestHandType.clear();
+                        highestHandType.add(bestTwoPairPlayer);
+                    }
+                    break;
+                case ThreeOfAKind:
+                    //TODO
+                    break;
+                case Straight:
+                    //TODO
+                    break;
+                case Flush:
+                    //TODO
+                    break;
+                case FullHouse:
+                    //TODO
+                    break;
+                case FourOfAKind:
+                    //TODO
+                    break;
+                case StraightFlush:
+                    //TODO
+                    break;
             }
         }
 

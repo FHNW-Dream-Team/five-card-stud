@@ -13,6 +13,7 @@ A little known game
 + Show who the winner is of each round
 + Resize window depending on player count
 + Nice design
++ Handle tie-breaks for HighCard, OnePair and TwoPair
 
 ## Installation
 
@@ -57,6 +58,7 @@ Please make sure to update tests as appropriate.
     + isStraightFlush
 + Simplified the sorting method using Comparator
 + Evaluated the winner and showed the winner(s)
++ Handled tie-breaks - a lot of redundant code :)
 
 ## License
 [MIT](LICENSE.txt)
