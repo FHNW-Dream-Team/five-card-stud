@@ -211,8 +211,8 @@ public class PokerGameController {
         ArrayList<Player> straightFlushWinning = new ArrayList<>();
         winners.add(straightFlushWinning);
 
+        // Add the players to the according array
         for (int i = 0; i < model.getPlayerCount(); i++) {
-
             Player player = model.getPlayer(i);
             HandType winningHand = player.getHandType();
 
@@ -247,6 +247,7 @@ public class PokerGameController {
             }
         }
 
+        // Find the highest available hand sets
         ArrayList<Player> highestHandType = new ArrayList<>();
         for (ArrayList<Player> currentHands : winners) {
             if (!currentHands.isEmpty()) {
@@ -261,25 +262,21 @@ public class PokerGameController {
                 case HighCard:
                     Player bestPlayer = null;
                     for (Player player : highestHandType) {
-                        player.getCards().sort(Comparator.comparing(Card::getRank));
-                        if (bestPlayer != null) {
-                            bestPlayer.getCards().sort(Comparator.comparing(Card::getRank));
-                        }
                         if (bestPlayer == null) {
                             bestPlayer = player;
-                        } else if (player.getCards().get(4).getRank().compareTo(bestPlayer.getCards().get(4).getRank()) == 1) {
+                        } else if (player.getCards().get(4).getRank().ordinal() > bestPlayer.getCards().get(4).getRank().ordinal()) {
                             bestPlayer = player;
-                        } else if (player.getCards().get(4).getRank().compareTo(bestPlayer.getCards().get(4).getRank()) == 0) {
-                            if (player.getCards().get(3).getRank().compareTo(bestPlayer.getCards().get(3).getRank()) == 1) {
+                        } else if (player.getCards().get(4).getRank().ordinal() == bestPlayer.getCards().get(4).getRank().ordinal()) {
+                            if (player.getCards().get(3).getRank().ordinal() > bestPlayer.getCards().get(3).getRank().ordinal()) {
                                 bestPlayer = player;
-                            } else if (player.getCards().get(3).getRank().compareTo(bestPlayer.getCards().get(3).getRank()) == 0) {
-                                if (player.getCards().get(2).getRank().compareTo(bestPlayer.getCards().get(2).getRank()) == 1) {
+                            } else if (player.getCards().get(3).getRank().ordinal() == bestPlayer.getCards().get(3).getRank().ordinal()) {
+                                if (player.getCards().get(2).getRank().ordinal() > bestPlayer.getCards().get(2).getRank().ordinal()) {
                                     bestPlayer = player;
-                                } else if (player.getCards().get(2).getRank().compareTo(bestPlayer.getCards().get(2).getRank()) == 0) {
-                                    if (player.getCards().get(1).getRank().compareTo(bestPlayer.getCards().get(1).getRank()) == 1) {
+                                } else if (player.getCards().get(2).getRank().ordinal() == bestPlayer.getCards().get(2).getRank().ordinal()) {
+                                    if (player.getCards().get(1).getRank().ordinal() > bestPlayer.getCards().get(1).getRank().ordinal()) {
                                         bestPlayer = player;
-                                    } else if (player.getCards().get(1).getRank().compareTo(bestPlayer.getCards().get(1).getRank()) == 0) {
-                                        if (player.getCards().get(0).getRank().compareTo(bestPlayer.getCards().get(0).getRank()) == 1) {
+                                    } else if (player.getCards().get(1).getRank().ordinal() == bestPlayer.getCards().get(1).getRank().ordinal()) {
+                                        if (player.getCards().get(0).getRank().ordinal() > bestPlayer.getCards().get(0).getRank().ordinal()) {
                                             bestPlayer = player;
                                         }
                                     }
@@ -295,11 +292,6 @@ public class PokerGameController {
                 case OnePair:
                     Player bestOnePairPlayer = null;
                     for (Player player : highestHandType) {
-                        player.getCards().sort(Comparator.comparing(Card::getRank));
-                        if (bestOnePairPlayer != null) {
-                            bestOnePairPlayer.getCards().sort(Comparator.comparing(Card::getRank));
-                        }
-
                         if (bestOnePairPlayer == null) {
                             bestOnePairPlayer = player;
                         } else {
@@ -328,16 +320,16 @@ public class PokerGameController {
                                 }
                             }
 
-                            if (player1PairCards.get(0).getRank().compareTo(bestPairPlayerCards.get(0).getRank()) == 1) {
+                            if (player1PairCards.get(0).getRank().ordinal() > bestPairPlayerCards.get(0).getRank().ordinal()) {
                                 bestOnePairPlayer = player;
-                            } else if (player1PairCards.get(0).getRank().compareTo(bestPairPlayerCards.get(0).getRank()) == 0) {
-                                if (clonedPlayer1Cards.get(2).getRank().compareTo(clonedBestPairPlayerCards.get(2).getRank()) == 1) {
+                            } else if (player1PairCards.get(0).getRank().ordinal() == bestPairPlayerCards.get(0).getRank().ordinal()) {
+                                if (clonedPlayer1Cards.get(2).getRank().ordinal() > clonedBestPairPlayerCards.get(2).getRank().ordinal()) {
                                     bestOnePairPlayer = player;
-                                } else if (clonedPlayer1Cards.get(2).getRank().compareTo(clonedBestPairPlayerCards.get(2).getRank()) == 0) {
-                                    if (clonedPlayer1Cards.get(1).getRank().compareTo(clonedBestPairPlayerCards.get(1).getRank()) == 1) {
+                                } else if (clonedPlayer1Cards.get(2).getRank().ordinal() == clonedBestPairPlayerCards.get(2).getRank().ordinal()) {
+                                    if (clonedPlayer1Cards.get(1).getRank().ordinal() > clonedBestPairPlayerCards.get(1).getRank().ordinal()) {
                                         bestOnePairPlayer = player;
-                                    } else if (clonedPlayer1Cards.get(1).getRank().compareTo(clonedBestPairPlayerCards.get(1).getRank()) == 0) {
-                                        if (clonedPlayer1Cards.get(0).getRank().compareTo(clonedBestPairPlayerCards.get(0).getRank()) == 1) {
+                                    } else if (clonedPlayer1Cards.get(1).getRank().ordinal() == clonedBestPairPlayerCards.get(1).getRank().ordinal()) {
+                                        if (clonedPlayer1Cards.get(0).getRank().ordinal() > clonedBestPairPlayerCards.get(0).getRank().ordinal()) {
                                             bestOnePairPlayer = player;
                                         }
                                     }
@@ -353,11 +345,6 @@ public class PokerGameController {
                 case TwoPair:
                     Player bestTwoPairPlayer = null;
                     for (Player player : highestHandType) {
-                        player.getCards().sort(Comparator.comparing(Card::getRank));
-                        if (bestTwoPairPlayer != null) {
-                            bestTwoPairPlayer.getCards().sort(Comparator.comparing(Card::getRank));
-                        }
-
                         if (bestTwoPairPlayer == null) {
                             bestTwoPairPlayer = player;
                         } else {
@@ -429,13 +416,13 @@ public class PokerGameController {
                                 }
                             }
 
-                            if (highestTwoPairPlayerCards.get(0).getRank().compareTo(highestBestTwoPairPlayerCards.get(0).getRank()) == 1) {
+                            if (highestTwoPairPlayerCards.get(0).getRank().ordinal() > highestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
                                 bestTwoPairPlayer = player;
-                            } else if (highestTwoPairPlayerCards.get(0).getRank().compareTo(highestBestTwoPairPlayerCards.get(0).getRank()) == 0) {
-                                if (lowestTwoPairPlayerCards.get(0).getRank().compareTo(lowestBestTwoPairPlayerCards.get(0).getRank()) == 1) {
+                            } else if (highestTwoPairPlayerCards.get(0).getRank().ordinal() == highestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
+                                if (lowestTwoPairPlayerCards.get(0).getRank().ordinal() > lowestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
                                     bestTwoPairPlayer = player;
-                                } else if (lowestTwoPairPlayerCards.get(0).getRank().compareTo(lowestBestTwoPairPlayerCards.get(0).getRank()) == 0) {
-                                    if (clonedPlayerCards.get(0).getRank().compareTo(clonedBestTwoPairPlayerCards.get(0).getRank()) == 1) {
+                                } else if (lowestTwoPairPlayerCards.get(0).getRank().ordinal() == lowestBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
+                                    if (clonedPlayerCards.get(0).getRank().ordinal() > clonedBestTwoPairPlayerCards.get(0).getRank().ordinal()) {
                                         bestTwoPairPlayer = player;
                                     }
                                 }
@@ -448,22 +435,22 @@ public class PokerGameController {
                     }
                     break;
                 case ThreeOfAKind:
-                    //TODO
+                    // TODO
                     break;
                 case Straight:
-                    //TODO
+                    // TODO
                     break;
                 case Flush:
-                    //TODO
+                    // TODO
                     break;
                 case FullHouse:
-                    //TODO
+                    // TODO
                     break;
                 case FourOfAKind:
-                    //TODO
+                    // TODO
                     break;
                 case StraightFlush:
-                    //TODO
+                    // TODO
                     break;
             }
         }
