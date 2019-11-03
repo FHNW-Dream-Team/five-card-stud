@@ -57,8 +57,8 @@ Please make sure to update tests as appropriate.
     + isFourOfAKind
     + isStraightFlush
 + Simplified the sorting method using Comparator
-+ Evaluated the winner and showed the winner(s)
-+ Handled tie-breaks w/ a lot of redundant code :)
++ Evaluated the winner(s) and showed the winner(s)
++ Handled tie-breaks w/ a lot of redundant code :(
 
 ## License
 [MIT](LICENSE.txt)
