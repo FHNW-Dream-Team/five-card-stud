@@ -9,8 +9,5 @@
         <module name="fhnw-five-card-stud" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="fhnw-five-card-stud" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
