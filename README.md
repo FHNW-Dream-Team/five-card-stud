@@ -1,8 +1,8 @@
-# Five Card Stud
+# fhnw-five-card-stud
 
 A little known game
 
-## Features
+## Getting Started
 
 + Add players to game
 + Add up to 10 players (logical maximum)
@@ -16,7 +16,7 @@ A little known game
 + Show each player what hand type they have, including: HighCard, OnePair, TwoPair, Three-of-a-kind, Straight (Low and High Straight), Flush, Full House, Four-of-a-kind and Straight flush
 + Tie-break handling for HighCard, OnePair and TwoPair - for the rest, show all winning players that have the same hand type
 
-## Installation
+### Installing
 
 Use Intellij to run code
 Or download the jar and run it in the console with one command
@@ -26,12 +26,6 @@ Or download the jar and run it in the console with one command
 ```powershell
 java -jar FiveCardStud.jar
 ```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 ## Changes
 
@@ -65,5 +59,31 @@ Please make sure to update tests as appropriate.
 + Evaluated the winner(s) and showed the winner(s)
 + Handled tie-breaks w/ a lot of redundant code :(
 
+## Built With
+
+* [Maven](https://maven.apache.org/) - Dependency Management
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/D3strukt0r/fhnw-chat/tags). 
+
+## Authors
+
+* **Manuele Vaccari** - *Initial work* - [D3strukt0r](https://github.com/D3strukt0r)
+* **Sasa Trajkova** - *Logic* - [sasatrajkova](https://github.com/sasatrajkova)
+
+See also the list of [contributors](https://github.com/D3strukt0r/fhnw-chat/contributors) who participated in this project.
+
 ## License
-[MIT](LICENSE.txt)
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.txt](LICENSE.txt) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
