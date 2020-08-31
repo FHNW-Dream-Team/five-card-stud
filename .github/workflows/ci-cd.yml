@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Verify
-        run: mvn -B verify --file pom-ci.xml
+        run: mvn -B verify --file pom.xml
 
       - name: Build
         run: mvn -B package --file pom.xml
