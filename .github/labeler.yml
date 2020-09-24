@@ -1,0 +1,11 @@
+# Add 'repo' label to any root file changes
+repo:
+  - ./*
+
+# Add 'source' label to any change to files within the source dir
+source:
+  - src/main/java/**/*
+
+# Add 'test' label to any change to files within the test dir
+test:
+  - src/test/java/**/*
