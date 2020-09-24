@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/java,macos,maven,windows,eclipse,intellij,database
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,macos,maven,windows,eclipse,intellij,database
+# Created by https://www.toptal.com/developers/gitignore/api/java,maven,macos,windows,eclipse,database,intellij,git
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,macos,windows,eclipse,database,intellij,git
 
 ### Database ###
 *.accdb
@@ -69,11 +69,26 @@ local.properties
 
 # Uncomment this line if you wish to ignore the project description file.
 # Typically, this file would be tracked if it contains build/dependency configurations:
-#.project
+.project
 
 ### Eclipse Patch ###
 # Spring Boot Tooling
 .sts4-cache/
+
+### Git ###
+# Created by git for backups. To disable backups in Git:
+# $ git config --global mergetool.keepBackup false
+*.orig
+
+# Created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -270,4 +285,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/java,macos,maven,windows,eclipse,intellij,database
+# End of https://www.toptal.com/developers/gitignore/api/java,maven,macos,windows,eclipse,database,intellij,git
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath

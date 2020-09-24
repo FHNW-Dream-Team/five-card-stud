@@ -2,20 +2,19 @@
 
 A little known game
 
-**Project**
+Project
 
 [![License](https://img.shields.io/github/license/d3strukt0r/fhnw-five-card-stud)][license]
 
-**master**-branch (alias stable, latest)
+master-branch (alias stable, latest)
 
 [![GH Action CI/CD](https://github.com/D3strukt0r/fhnw-five-card-stud/workflows/CI/CD/badge.svg?branch=master)][gh-action]
+[![Codacy grade](https://img.shields.io/codacy/grade/4f30369b0d174bf6910696c03ad487f5/master)][codacy]
 
-**develop**-branch (alias nightly)
+develop-branch (alias nightly)
 
 [![GH Action CI/CD](https://github.com/D3strukt0r/fhnw-five-card-stud/workflows/CI/CD/badge.svg?branch=develop)][gh-action]
-
-[license]: https://github.com/D3strukt0r/fhnw-five-card-stud/blob/master/LICENSE.txt
-[gh-action]: https://github.com/D3strukt0r/fhnw-five-card-stud/actions
+[![Codacy grade](https://img.shields.io/codacy/grade/4f30369b0d174bf6910696c03ad487f5/develop)][codacy]
 
 ## Getting Started
 
@@ -38,13 +37,13 @@ Or download the jar and run it in the console with one command
 
 ## Usage
 
-```powershell
+```shell
 java -jar FiveCardStud.jar
 ```
 
 ## Changes
 
-**by Manuele Vaccari**
+by Manuele Vaccari
 
 -   Initialized Project and prepared all files
 -   Added function to add player to lobby
@@ -60,7 +59,7 @@ java -jar FiveCardStud.jar
 -   Fix "evaluateWinner" function not always working
 -   Added documentation
 
-**by Sasa Trajkova**
+by Sasa Trajkova
 
 -   Added shadow color
 -   Added documentation
@@ -97,10 +96,14 @@ See also the list of [contributors](https://github.com/D3strukt0r/fhnw-five-card
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.txt](LICENSE.txt) file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.txt](LICENSE.txt) file for details.
 
 ## Acknowledgments
 
 -   Hat tip to anyone whose code was used
 -   Inspiration
 -   etc
+
+[license]: https://github.com/D3strukt0r/fhnw-five-card-stud/blob/master/LICENSE.txt
+[gh-action]: https://github.com/D3strukt0r/fhnw-five-card-stud/actions
+[codacy]: https://app.codacy.com/manual/D3strukt0r/fhnw-five-card-stud/dashboard
