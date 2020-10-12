@@ -3,12 +3,14 @@ name: CI/CD
 on:
   push:
     branches:
-      - master
-      - develop
+      - "**"
     tags:
-      - "*"
+      - "*.*.*"
+    paths:
+      - .github/workflows/ci-cd.yml
+      - "src/**"
+      - pom.xml
 
-  # Run tests for any PRs.
   pull_request:
 
   workflow_dispatch:
@@ -19,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up JDK 1.8
+      - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: 1.8 # The JDK version to make available on the path.
